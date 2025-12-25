@@ -1,0 +1,2385 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MBX_PROPOSAL.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="matter-brand-experience-mbx">Matter Brand Experience (MBX)</h1>
+<h2 id="your-brand-every-platform-zero-apps">Your Brand. Every Platform. Zero Apps.</h2>
+<p><strong>Proposal Status:</strong> Draft for Review<br>
+<strong>Target:</strong> Connectivity Standards Alliance (CSA)<br>
+<strong>Version:</strong> 1.0<br></p>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="executive-summary">Executive Summary</h1>
+<h2 id="the-problem-were-solving">The Problem We're Solving</h2>
+<p>Matter successfully standardized how smart home devices communicate—discovery, commissioning, and control protocols are now interoperable across platforms. <strong>But Matter is silent on user interfaces.</strong></p>
+<p>The result is painfully familiar to every smart home user:</p>
+<ul>
+<li>&quot;For schedules, download the Ecobee app&quot;</li>
+<li>&quot;For color scenes, download the Philips Hue app&quot;</li>
+<li>&quot;For user codes, download the Yale app&quot;</li>
+<li>A typical smart home requires 5-6 vendor apps</li>
+</ul>
+<p>Platform apps (Apple Home, Google Home, Amazon Alexa) provide basic controls—on/off, brightness—but cannot render vendor-specific features, custom clusters, or branded experiences. So vendors continue building proprietary apps, fragmenting the experience Matter was designed to unify.</p>
+<p><strong>Matter promised interoperability. Users got app sprawl.</strong></p>
+<h2 id="the-solution-matter-brand-experience">The Solution: Matter Brand Experience</h2>
+<p>MBX completes Matter's vision by standardizing portable, branded device interfaces that render natively across all platforms.</p>
+<p><strong>The concept is simple:</strong></p>
+<ol>
+<li>Vendor writes ONE UI module (~100 lines of Lua code)</li>
+<li>Module goes to CSA Registry (certified, signed)</li>
+<li>ALL platforms automatically render it (Apple Home, Google Home, Amazon Alexa)</li>
+<li>User picks ONE app—gets full vendor branding and features everywhere</li>
+</ol>
+<p><strong>The key insight:</strong> Platforms don't need built-in UIs for every device type. They need a runtime that can render <em>any</em> device UI from a simple, sandboxed module. When CSA adds a new device type, platforms support it automatically—no app updates required.</p>
+<h2 id="why-%22brand-experience%22">Why &quot;Brand Experience&quot;?</h2>
+<p>The name reflects the core value proposition for vendors:</p>
+<p><strong>Without MBX:</strong> Your brand lives in a separate app. Users download it, forget about it, or never install it at all. Your premium features are invisible in the platforms users actually use.</p>
+<p><strong>With MBX:</strong> Your brand appears directly in Apple Home, Google Home, and Amazon Alexa. Your logo. Your colors. Your special features. The Philips Hue experience inside every platform app—without Philips building or maintaining any of those apps.</p>
+<p><strong>One module. Every platform. Full branding.</strong></p>
+<div style="page-break-after: always;"></div>
+<h2 id="visual-example-progressive-brand-enhancement">Visual Example: Progressive Brand Enhancement</h2>
+<p><img src="MDUI_example_screens.png" alt="MBX Progressive Customization"></p>
+<p><em>Four levels of MBX rendering for a color light, all using native iOS components:</em></p>
+<table>
+<thead>
+<tr>
+<th>Screen</th>
+<th>What You See</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Standard</strong></td>
+<td>CSA-provided module. Full functionality, no branding. This is what you get if a vendor does nothing—it's still complete.</td>
+</tr>
+<tr>
+<td><strong>Branded</strong></td>
+<td>Philips adds their Hue logo and a &quot;Hue Scenes&quot; button. Same underlying controls, but now it's THEIR experience in Apple Home.</td>
+</tr>
+<tr>
+<td><strong>Extended</strong></td>
+<td>A different vendor (Lowpan) adds a schedule indicator. Users see &quot;Sunset → Sunrise&quot; right on the main screen.</td>
+</tr>
+<tr>
+<td><strong>Extended UI</strong></td>
+<td>Tapping the schedule opens a native bottom sheet with full scheduling controls.</td>
+</tr>
+</tbody>
+</table>
+<p>The same module renders with platform-native styling on iOS, Android, and every other platform. Philips doesn't need to maintain iOS and Android apps—they maintain one Lua module.</p>
+<div style="page-break-after: always;"></div>
+<h2 id="the-game-changer-instant-new-device-support"><strong>The Game Changer: Instant New Device Support</strong></h2>
+<p>This is perhaps the most compelling benefit for CSA itself.</p>
+<p><strong>Today's Reality:</strong></p>
+<p>When CSA ratifies a new device type (Robot Vacuum, Pet Feeder, EV Charger):</p>
+<ul>
+<li>CSA publishes the specification</li>
+<li>Apple updates Home app: 6-12 months</li>
+<li>Google updates Home app: 6-12 months</li>
+<li>Amazon updates Alexa: 6-12 months</li>
+<li>Users wait 1-2 years for full platform support—if platforms prioritize it at all</li>
+</ul>
+<p><strong>With MBX:</strong></p>
+<ul>
+<li>CSA publishes the specification AND the standard Lua module</li>
+<li>Platforms pull it from the registry automatically</li>
+<li>Users have full UI on day one</li>
+<li><strong>No platform app updates required. Ever.</strong></li>
+</ul>
+<p>CSA controls the pace of innovation. Not platform release cycles.</p>
+<h2 id="who-wins">Who Wins</h2>
+<table>
+<thead>
+<tr>
+<th>Stakeholder</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Users</strong></td>
+<td>One app for everything. Full device control. No more &quot;download our app.&quot;</td>
+</tr>
+<tr>
+<td><strong>Device Vendors</strong></td>
+<td>Write once, reach all platforms. Brand presence everywhere. No app maintenance.</td>
+</tr>
+<tr>
+<td><strong>Platform Vendors</strong></td>
+<td>Richer ecosystem. Better UX. No more implementing 50+ device type UIs.</td>
+</tr>
+<tr>
+<td><strong>CSA</strong></td>
+<td>Fulfills Matter's promise. Controls new device type rollout. Drives adoption.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-1-understanding-the-problem">Part 1: Understanding the Problem</h1>
+<h2 id="what-matter-delivers-today">What Matter Delivers Today</h2>
+<p>Matter 1.0+ provides excellent interoperability at the protocol level:</p>
+<ul>
+<li>✅ Unified device discovery (mDNS/DNS-SD)</li>
+<li>✅ Standardized commissioning (PASE, CASE)</li>
+<li>✅ Interoperable control protocol (TLV over TCP/UDP)</li>
+<li>✅ Common data model (clusters, attributes, commands)</li>
+<li>✅ Multi-admin support (devices work with multiple platforms)</li>
+</ul>
+<p><strong>What Matter explicitly does NOT address:</strong></p>
+<ul>
+<li>❌ User interface rendering</li>
+<li>❌ Vendor branding in platform apps</li>
+<li>❌ Custom cluster UI support</li>
+<li>❌ Advanced feature access (schedules, automations, settings)</li>
+</ul>
+<h2 id="the-user-experience-today">The User Experience Today</h2>
+<p>A user with a typical smart home (lights, thermostat, locks, sensors) experiences:</p>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>In Apple Home</th>
+<th>Full Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Philips Hue</td>
+<td>On/Off, Brightness, Color</td>
+<td>Scenes, Entertainment, Sync → <strong>Requires Hue app</strong></td>
+</tr>
+<tr>
+<td>Ecobee Thermostat</td>
+<td>Temperature, Mode</td>
+<td>Schedules, Sensors, Reports → <strong>Requires Ecobee app</strong></td>
+</tr>
+<tr>
+<td>Yale Lock</td>
+<td>Lock/Unlock</td>
+<td>User codes, History, Auto-lock → <strong>Requires Yale app</strong></td>
+</tr>
+<tr>
+<td>Nanoleaf</td>
+<td>On/Off, Color</td>
+<td>Rhythm, Scenes, Touch actions → <strong>Requires Nanoleaf app</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Result:</strong> 4 devices = 5 apps (platform + 4 vendor apps)</p>
+<p>This directly contradicts Matter's value proposition: &quot;Buy any device, use any app.&quot;</p>
+<h2 id="the-vendor-dilemma">The Vendor Dilemma</h2>
+<p>Device vendors face an impossible choice:</p>
+<p><strong>Option A: Basic Matter Support Only</strong></p>
+<ul>
+<li>Limited to standard cluster controls</li>
+<li>No differentiation from competitors</li>
+<li>Features that make their product special are inaccessible</li>
+<li>Brand invisible to users</li>
+</ul>
+<p><strong>Option B: Build and Maintain Mobile Apps</strong></p>
+<ul>
+<li>iOS app (Swift, SwiftUI, yearly iOS updates)</li>
+<li>Android app (Kotlin, Compose, device fragmentation)</li>
+<li>Ongoing maintenance, bug fixes, feature parity</li>
+<li>App store fees, review processes</li>
+<li>Support burden for years</li>
+</ul>
+<p>Most vendors choose Option B. It's expensive, distracting from their core hardware business, and perpetuates the very fragmentation Matter was supposed to solve.</p>
+<h2 id="the-platform-limitation">The Platform Limitation</h2>
+<p>Platform apps (Apple Home, Google Home) cannot render:</p>
+<ul>
+<li>Vendor-specific clusters (custom features)</li>
+<li>Vendor branding (logo, colors, messaging)</li>
+<li>Advanced configurations (schedules, automations)</li>
+<li>Device-specific UI patterns (color wheels, thermostat arcs)</li>
+</ul>
+<p>Platforms are limited to generic controls. A $200 Philips Hue bulb looks exactly like a $15 generic bulb in Apple Home. No scenes. No entertainment mode. No Philips experience.</p>
+<h2 id="the-opportunity">The Opportunity</h2>
+<p><strong>What if vendors could ship a branded UI definition with their device—one that renders natively on every platform?</strong></p>
+<ul>
+<li>Users get full functionality in their preferred app</li>
+<li>Vendors reach every platform without building apps</li>
+<li>Platforms offer richer experiences automatically</li>
+<li>Matter's promise is fulfilled</li>
+</ul>
+<h2 id="this-is-mbx"><strong>This is MBX.</strong></h2>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-2-how-mbx-works">Part 2: How MBX Works</h1>
+<h2 id="the-core-concept">The Core Concept</h2>
+<p>MBX modules are small programs written in Lua that describe user interfaces. They don't draw pixels—they describe what UI elements should appear (toggles, sliders, buttons) and what happens when users interact with them. Platforms take that description and render it using their native frameworks.</p>
+<p>Think of it like HTML for device controls:</p>
+<ul>
+<li>HTML describes document structure; browsers render it</li>
+<li>MBX modules describe device UIs; platforms render them</li>
+</ul>
+<h2 id="a-simple-example">A Simple Example</h2>
+<p>Here's what a basic light control module looks like:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">local</span> Module = {
+    name = <span class="hljs-string">"Philips Hue Color Light"</span>,
+    version = <span class="hljs-string">"1.0.0"</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Module.render</span><span class="hljs-params">(device, state)</span></span>
+    <span class="hljs-keyword">local</span> onOff = state.OnOff <span class="hljs-keyword">or</span> {}
+    <span class="hljs-keyword">local</span> level = state.LevelControl <span class="hljs-keyword">or</span> {}
+
+    <span class="hljs-keyword">return</span> UI.Column {
+        children = {
+            <span class="hljs-comment">-- Vendor logo</span>
+            UI.Image { src = <span class="hljs-string">"https://cdn.philips-hue.com/logo.png"</span>, height = <span class="hljs-number">24</span> },
+
+            <span class="hljs-comment">-- Power toggle</span>
+            UI.Toggle {
+                value = onOff.onOff <span class="hljs-keyword">or</span> <span class="hljs-literal">false</span>,
+                label = <span class="hljs-string">"Power"</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span></span> Matter.setOnOff(v) <span class="hljs-keyword">end</span>
+            },
+
+            <span class="hljs-comment">-- Brightness slider</span>
+            UI.Slider {
+                value = level.currentLevel <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>,
+                <span class="hljs-built_in">min</span> = <span class="hljs-number">1</span>, <span class="hljs-built_in">max</span> = <span class="hljs-number">254</span>,
+                label = <span class="hljs-string">"Brightness"</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span></span> Matter.setLevel(v) <span class="hljs-keyword">end</span>
+            }
+        }
+    }
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">return</span> Module
+</div></code></pre>
+<p>That's it. About 25 lines of code. This module:</p>
+<ol>
+<li>Shows the Philips logo</li>
+<li>Renders a power toggle that sends Matter on/off commands</li>
+<li>Renders a brightness slider that sends Matter level commands</li>
+</ol>
+<p>When this runs on iOS, it becomes native SwiftUI controls. On Android, native Material Design. The module author never thinks about platform differences.</p>
+<h2 id="the-architecture">The Architecture</h2>
+<img src="http://www.plantuml.com/plantuml/svg/TPF1Rjim38RlVWeYlJJ0V5blEmnTsnW8q0H5qmGx-C98j2lKeWAPIZeCk-u1zeXxaj6EEpXPfvCWaXz__hIlMy4eoJTP--9uXn4zRD6yr34ajhUX2H4Epqve5BTKOMga22nBz0HVeiDn_KxhiQQRCyp5xAhuMDoD4YCPGQwRVrEB_cJYf25Ot7pL7gPJOIH5ohAX0qowq2BOrD04lcUWvozJWoHeKR3aFCzBjhHtXfw-xQZaFSNM1Ivv6v6juxharjMC7Nu2s8BNsdFUoZoJVwEP9hMYb5AB9Bfj4jAx2TuhiEqPRPz_JbdFuOugnqvw0JqiaggBbqU57q1t8ZGj-VVFNx2UBuCba4Wgk-G75GXLOjDLVrBLNIeuXcCkX2Hzx-HqIzcFaLKF3KeLeeV7nEByUuRT9uJDekJBbSwm3QzafuF0sIkPuuI3r6dVfKcuz_-pQSQrOne06soSxg8ZFDrlWDGfIoENYEjppXB5xGaU-uOK1z3WHpVkwk0gMSzFtcw3tuMMJjuAfvwjvtstED0wQqw-djo60-UVt_4fkzOQ_KF-0000" alt="uml diagram">
+<p><strong>Key components:</strong></p>
+<ol>
+<li>
+<p><strong>Lua VM (Sandboxed)</strong> - Executes the module's render function. Cannot access files, network, or device sensors. Only sees device state and can only output UI descriptions.</p>
+</li>
+<li>
+<p><strong>Schema Engine</strong> - Handles custom cluster encoding. Vendors define their clusters in JSON; the engine handles TLV encoding/decoding automatically.</p>
+</li>
+<li>
+<p><strong>Native Renderer</strong> - Converts the UI description to platform-native controls. The module says &quot;Slider&quot;; iOS renders a SwiftUI Slider; Android renders a Material Slider.</p>
+</li>
+</ol>
+<h2 id="how-state-flows">How State Flows</h2>
+<p>When device state changes, the UI updates automatically:</p>
+<p><img src="MDUI_diagram_execution_model.png" alt="State Flow"></p>
+<img src="http://www.plantuml.com/plantuml/svg/NL9BJy8n3B_lKpJn0eclw6rSV9AG21eLlN0PM__GkFz6kWuqXkzkUSIWjwxxlThjgeXZgMqqvOFImh5hOUhynunpJU4snyomcfFWmNt0njKe_Pnav5g4QoPto7TUQ4doTVDFv-Z-id_HlpD24X5Un0b2F-OLT9vnoy6kCNReH93X3fVaiMTILXJJR2uMtYa6xpX0gTFYcHP2EKrI1p-f2AKPxBaj-hbBLDgkiTSYJDEg8kD5KCVIC_OfEcaoj_iCGvVS3FclrsrEIsGf81cASFLI6TLvmx2Jz0sFwR5fB7n3tXMAGLWVJnB00ounge1mZXk4hyoOPDksS75-3cjO6_jG7RmDBRGvr8Yd2Wd8dR0T_7ZdrFqRwaapG5EJtmmE9v0q6mK4R1hqKemT3qPPpw-C2Ahaepx8Ph7wPhyBKqqxsdMVjvQwiSxBYXeP3-1C1syNkQ1MAFwqUxYkyQ1dhfIYt-K7" alt="uml diagram">
+<p>The module author doesn't manage subscriptions, handle callbacks, or worry about timing. They write a pure function: given this device state, return this UI. The platform handles everything else.</p>
+<h2 id="how-commands-flow">How Commands Flow</h2>
+<p>When users interact with controls:</p>
+<img src="http://www.plantuml.com/plantuml/svg/NL7BJiCm4BpxArRYaaWKLN1BBuL2f4g58bMzzRA9DwbLnuxMwrJy01_09_8bk0z4osqzdfdTsPq6GPROMHLsnlN8s465zQvb7vsUUUiPzbiZTF6lgS5efVHEth0ZU6I3btginGn6Ffx--ToKPVdmCbPYn1BCVDUXqr1QluUiD4oZz1oLdbkINAbY7OXXxeJuOEWTP88zY6zRIxVG-O4WMAE9yqaYps66rXv6X-_FBrX4X2Qwet2Yd1S2DkrM2dX5IPPtWMJfbasJ2KVAD-uFNj10DhiVZtDLl5kKndDtLi5AKeDhlmGvZQn_AVKfbogUQJ0rNPDF6CHUer20f61JHQ6DMyKgr6pwOr9DrWp4uKnKHMgIJ4whmYf5po7jYydf0sizdwXfgjCPVm00" alt="uml diagram">
+<p>Commands are fire-and-forget. The module says &quot;turn on&quot;; the platform sends the Matter command; the device updates its state; the subscription delivers the update; the UI re-renders. No callbacks, no async handling, no error management in the module code.</p>
+<h2 id="module-discovery">Module Discovery</h2>
+<p><img src="MDUI_diagram_discovery_flow.png" alt="Module Discovery Flow"></p>
+<p>How does a platform know which module to use for a device?</p>
+<p>MBX uses <strong>vendor-specific device types</strong>. Matter already supports endpoints with multiple device types in their <code>deviceTypeList</code>. Vendors add their vendor-specific device type alongside the standard type:</p>
+<p><strong>Standard light (no vendor branding):</strong></p>
+<pre class="hljs"><code><div>deviceTypeList: [0x010D]
+→ Platform fetches: standard/color_light module
+→ Renders full-featured, unbranded UI
+</div></code></pre>
+<p><strong>Philips Hue light (vendor branding):</strong></p>
+<pre class="hljs"><code><div>deviceTypeList: [0x010D, 0x100B_0001]
+                   │         │
+                   │         └── Vendor device type (32-bit)
+                   │             Upper 16 bits: Vendor ID (0x100B = Philips)
+                   │             Lower 16 bits: Device type (0x0001)
+                   └── Standard Extended Color Light (baseline capability)
+
+→ Platform sees 0x100B_0001, fetches Philips module
+→ Renders branded Philips Hue experience
+</div></code></pre>
+<p><strong>Device Type ID Format:</strong></p>
+<ul>
+<li><strong>Standard device types (16-bit):</strong> <code>0x0000</code> - <code>0xFFFE</code> — Defined by CSA</li>
+<li><strong>Vendor device types (32-bit):</strong> <code>0xVVVVDDDD</code> — Upper 16 bits = Vendor ID, Lower 16 bits = Device type</li>
+</ul>
+<p>Benefits:</p>
+<ol>
+<li>Vendor ID embedded in device type—no separate lookup needed</li>
+<li>Explicit opt-in—vendors choose which products get branded UI</li>
+<li>Standard baseline always works—every device has full UI from CSA modules</li>
+<li>Uses existing Matter mechanisms—no protocol changes required</li>
+</ol>
+<h2 id="schema-driven-tlv-no-generated-code-required">Schema-Driven TLV: No Generated Code Required</h2>
+<p>This is a critical architectural advantage that dramatically simplifies platform implementation.</p>
+<h3 id="the-traditional-approach-complex">The Traditional Approach (Complex)</h3>
+<p>Today's Matter controller apps use <strong>ZAP-generated code</strong>—device-specific APIs generated from cluster definitions:</p>
+<img src="http://www.plantuml.com/plantuml/svg/RP9HIyCm4CVVyoaEVL5qemXxyK5MM-PBTGFt81CVOd9Tmz9SIRCD5B-xQQPRrgrGIEv-zy__SXctZbkthZLhLyeqtF8QFhbOBIsjZSn8auLjfHn6UOabNsit8UDUU8sGMiNZUel2SRFK-DWJkfnCiZo_OquvZJ2tN2gdo70DQTDOugAwXqKw6poXGSiTIiX88cDxGRXOP0MyFHUGOwbCg6ulWBVm9VGHbivWJgHtETuSQHpaSzmeWOFN1eKgbGZ7mTKekKsIv0QqCjXU1udblkIRWVyYjQcPbcMcrwr36rWoL9Pzgi0DwipVc2KTmxgBz-5mMsTWqSNxyBn2MvCVeujH5w9zDYUo1OdLaGE_xtCZttrD5eV3OM2wDGjGQ0u6LYqhzrufAT5y31wYDiBg53XOtpax8_7lerkSfeE5o86ahOdIV_t-CEPVmYxhezta_R_VxyV8ncYaV_M_" alt="uml diagram">
+<p><strong>Problems with this approach:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Code bloat</strong></td>
+<td>Thousands of lines of generated Swift/Kotlin per cluster</td>
+</tr>
+<tr>
+<td><strong>Platform updates required</strong></td>
+<td>New clusters require regenerating and shipping new app versions</td>
+</tr>
+<tr>
+<td><strong>Version coupling</strong></td>
+<td>App must match Matter SDK version exactly</td>
+</tr>
+<tr>
+<td><strong>Custom clusters impossible</strong></td>
+<td>Vendor clusters can't be added without platform code changes</td>
+</tr>
+<tr>
+<td><strong>Maintenance burden</strong></td>
+<td>Every cluster change requires regeneration and testing</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-mbx-approach-simple">The MBX Approach (Simple)</h3>
+<p>MBX controller apps use <strong>schema-driven TLV encoding</strong>—a single generic engine that reads schemas at runtime:</p>
+<img src="http://www.plantuml.com/plantuml/svg/TPB1Jjj048RlVeeHlO3aH5oA80T4IDDU33bG8GwHq6Ht7AzOpqQxOqSLekBK1wZwX3m9wus3Gg0-hJp__ytyitiH1BqqjSt2W-4LUgnXWUfXwLt3UkAiyx2kZD1ENLE9ZPNlZkKQQuAnDxZhzwG4UMdfSW_qPN8wFPcSPMB44bnTti5ujV8ELJM26rLHZODlthJ4yBEupR8t3XmK3SALqqqyhurKlVe0C42z-VsOGVnsB3EUbIM499opqICuoK6vkaRM8GSKyI417BkolDy8zo45jMJVGKu_XzXE-1_8BR6EwNSfgWdYwXo6ms6ojqcozJ-zo_w3cBnHtKvWoal3DEV3tr-FZy76Sm1nWlOeOIYLF-w2M3bDXyh6jkJV4kIGBYmSpVdbpz_KOF5BAFIiphDFqfH8Ojky3zIR7zCoHj2YRGYU4c8ZxkAm4uA5anWQNDdF6Tcpw-bsw2eEP6ESSL50FsY8YflOMQEFisvsbFUxUtd-XzQ2L0GXFi8i5g7hacNzWnXej-R1-RRNHHJ4P_uA" alt="uml diagram">
+<p><strong>How it works:</strong></p>
+<ol>
+<li><strong>Module includes schema</strong> - Each Lua module contains JSON schema for its clusters</li>
+<li><strong>Platform has generic TLV engine</strong> - One small engine (~500 lines) encodes/decodes any cluster</li>
+<li><strong>Schema drives encoding</strong> - Engine reads schema to know cluster IDs, attribute IDs, types</li>
+<li><strong>No generated code needed</strong> - Platform ships once, handles all clusters forever</li>
+</ol>
+<h3 id="concrete-example">Concrete Example</h3>
+<p>When a Lua module calls:</p>
+<pre class="hljs"><code><div>Matter.command(<span class="hljs-string">"OnOff"</span>, <span class="hljs-string">"On"</span>, {})
+</div></code></pre>
+<p>The platform's generic engine:</p>
+<ol>
+<li>Looks up &quot;OnOff&quot; in schema → cluster ID 0x0006</li>
+<li>Looks up &quot;On&quot; command → command ID 0x01</li>
+<li>Encodes empty params {} as TLV</li>
+<li>Sends standard Matter InvokeCommand</li>
+</ol>
+<p>When the device responds with attribute data:</p>
+<ol>
+<li>Engine receives TLV bytes</li>
+<li>Looks up cluster 0x0006 in schema → &quot;OnOff&quot;</li>
+<li>Looks up attribute 0x0000 → &quot;onOff&quot;, type boolean</li>
+<li>Decodes TLV to <code>{ onOff: true }</code></li>
+<li>Passes to Lua as <code>state.OnOff.onOff</code></li>
+</ol>
+<p><strong>The platform never needs cluster-specific code.</strong></p>
+<h3 id="why-this-matters">Why This Matters</h3>
+<table>
+<thead>
+<tr>
+<th>Benefit</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Smaller platform apps</strong></td>
+<td>~500 lines vs thousands of generated lines</td>
+</tr>
+<tr>
+<td><strong>No platform updates for new clusters</strong></td>
+<td>Schema comes with module, not compiled into app</td>
+</tr>
+<tr>
+<td><strong>Custom clusters work automatically</strong></td>
+<td>Vendor schemas handled identically to standard</td>
+</tr>
+<tr>
+<td><strong>Simpler maintenance</strong></td>
+<td>One TLV engine to test, not 50+ cluster implementations</td>
+</tr>
+<tr>
+<td><strong>Faster development</strong></td>
+<td>Platform team writes one engine, done</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comparison">Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Traditional (ZAP)</th>
+<th>MBX (Schema-Driven)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code size</td>
+<td>~50,000 lines generated</td>
+<td>~500 lines engine</td>
+</tr>
+<tr>
+<td>New standard cluster</td>
+<td>Regenerate, rebuild, ship update</td>
+<td>Module update only</td>
+</tr>
+<tr>
+<td>New vendor cluster</td>
+<td>Impossible without platform change</td>
+<td>Just works</td>
+</tr>
+<tr>
+<td>Testing surface</td>
+<td>Every generated class</td>
+<td>One generic engine</td>
+</tr>
+<tr>
+<td>Platform coupling</td>
+<td>Tight SDK version coupling</td>
+<td>Decoupled</td>
+</tr>
+</tbody>
+</table>
+<p>This is one of MBX's most significant technical advantages. Platform vendors implement a single, small TLV engine and never touch cluster-specific code again. All cluster knowledge lives in the schemas bundled with Lua modules.</p>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-3-why-this-approach-works">Part 3: Why This Approach Works</h1>
+<h2 id="proven-patterns-at-scale">Proven Patterns at Scale</h2>
+<p>MBX isn't a novel architecture. It applies patterns already proven at massive scale.</p>
+<h3 id="server-driven-ui-sdui">Server-Driven UI (SDUI)</h3>
+<p>Major companies use server-driven UI to ship UI updates without app releases:</p>
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>How It Works</th>
+<th>Scale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Airbnb</strong></td>
+<td>Server sends JSON UI descriptions, apps render natively</td>
+<td>Millions of users</td>
+</tr>
+<tr>
+<td><strong>Shopify</strong></td>
+<td>Merchant storefronts rendered from server data</td>
+<td>Millions of merchants</td>
+</tr>
+<tr>
+<td><strong>Lyft</strong></td>
+<td>Ride experience UI driven by server responses</td>
+<td>Millions of rides/day</td>
+</tr>
+<tr>
+<td><strong>Netflix</strong></td>
+<td>Personalized layouts delivered as data</td>
+<td>200M+ subscribers</td>
+</tr>
+</tbody>
+</table>
+<p>The pattern:</p>
+<ol>
+<li>Server (or module) sends a declarative UI description</li>
+<li>Client (or platform) renders it with native components</li>
+<li>Result: UI updates without app releases</li>
+</ol>
+<p>MBX applies this exact pattern. Vendor modules send UI descriptions. Platform apps render them natively.</p>
+<h3 id="apple-widgetkit">Apple WidgetKit</h3>
+<p>Apple's WidgetKit is architecturally identical to MBX:</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>WidgetKit</th>
+<th>MBX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>UI Model</strong></td>
+<td>Declarative SwiftUI</td>
+<td>Declarative Lua → UINode</td>
+</tr>
+<tr>
+<td><strong>Components</strong></td>
+<td>Limited SwiftUI views</td>
+<td>Limited UI primitives</td>
+</tr>
+<tr>
+<td><strong>Rendering</strong></td>
+<td>iOS renders the widget</td>
+<td>Platform renders the module</td>
+</tr>
+<tr>
+<td><strong>Execution</strong></td>
+<td>Sandboxed, limited APIs</td>
+<td>Sandboxed, limited APIs</td>
+</tr>
+<tr>
+<td><strong>Source</strong></td>
+<td>App provides widget code</td>
+<td>Vendor provides module code</td>
+</tr>
+<tr>
+<td><strong>Host</strong></td>
+<td>iOS Home/Lock Screen</td>
+<td>Apple Home / Google Home</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-comment">// WidgetKit: App provides declarative UI for iOS to render</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">WeatherWidget</span>: <span class="hljs-title">Widget</span> </span>{
+    <span class="hljs-keyword">var</span> body: some <span class="hljs-type">WidgetConfiguration</span> {
+        <span class="hljs-type">StaticConfiguration</span>(...) { entry <span class="hljs-keyword">in</span>
+            <span class="hljs-type">VStack</span> {
+                <span class="hljs-type">Text</span>(entry.temperature)
+                <span class="hljs-type">Image</span>(systemName: entry.icon)
+            }
+        }
+    }
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">-- MBX: Vendor provides declarative UI for platform to render</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Module.render</span><span class="hljs-params">(device, state)</span></span>
+    <span class="hljs-keyword">return</span> UI.Column {
+        children = {
+            UI.Text { text = state.temperature },
+            UI.Icon { name = state.icon }
+        }
+    }
+<span class="hljs-keyword">end</span>
+</div></code></pre>
+<p><strong>WidgetKit is MBX for the home screen. MBX is WidgetKit for smart home devices.</strong></p>
+<p>Apple ships WidgetKit to 1+ billion devices. Millions of widgets from thousands of developers run in sandboxed environments. If Apple trusts sandboxed code for the home screen, platforms can trust it for device UI.</p>
+<h3 id="react-native--flutter">React Native / Flutter</h3>
+<p>Cross-platform frameworks that render native UI from a single codebase:</p>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>How it works</th>
+<th>MBX parallel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>React Native</td>
+<td>JavaScript describes UI, native renderers per platform</td>
+<td>Lua describes UI, native renderers per platform</td>
+</tr>
+<tr>
+<td>Flutter</td>
+<td>Dart describes UI, consistent rendering engine</td>
+<td>Lua describes UI, platform renders natively</td>
+</tr>
+</tbody>
+</table>
+<p>MBX differs in one key way: modules produce <strong>declarative output only</strong>. The Lua code runs, but it only outputs a UI tree—no direct rendering, no platform API access. This makes it safer (sandboxed) and more consistent (platforms control appearance).</p>
+<h2 id="why-lua">Why Lua?</h2>
+<p>A natural question: &quot;Why not just use JSON for UI descriptions?&quot;</p>
+<p><strong>Answer:</strong> Device UIs need logic.</p>
+<ul>
+<li>Show heat slider only when mode is &quot;Heat&quot;</li>
+<li>Calculate percentage from raw sensor value</li>
+<li>Format temperature based on user's locale</li>
+<li>Conditionally render based on device capabilities</li>
+<li>Show different controls based on device state</li>
+</ul>
+<p>Pure data formats (JSON, YAML) can't express this. You need a language.</p>
+<p><strong>Why Lua specifically?</strong></p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Why Lua Fits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Easy to sandbox</strong></td>
+<td>Lua was designed for embedding; trivial to remove dangerous APIs</td>
+</tr>
+<tr>
+<td><strong>Small runtime</strong></td>
+<td>~200KB, fits in any mobile app</td>
+</tr>
+<tr>
+<td><strong>Fast startup</strong></td>
+<td>No JIT warmup, instant execution</td>
+</tr>
+<tr>
+<td><strong>Simple syntax</strong></td>
+<td>Vendors learn it in hours, not days</td>
+</tr>
+<tr>
+<td><strong>Battle-tested</strong></td>
+<td>Powers Roblox (70M+ daily users), Redis, Nginx, game engines</td>
+</tr>
+<tr>
+<td><strong>No dependencies</strong></td>
+<td>Single library, no package managers or build tools</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why not JavaScript?</strong></p>
+<p>JavaScript runtimes (V8, JavaScriptCore) are large, have complex sandbox requirements, and bring ecosystem expectations (npm, bundlers) that add friction. Lua is purpose-built for embedding.</p>
+<p><strong>Luau</strong> (Roblox's typed Lua variant) adds optional type safety and is MIT-licensed. It's the recommended variant for MBX.</p>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-4-the-critical-design-decision">Part 4: The Critical Design Decision</h1>
+<h2 id="all-device-ui-must-be-lua">ALL Device UI Must Be Lua</h2>
+<p>This is perhaps the most important architectural decision in MBX:</p>
+<p><strong>Platforms do not have built-in native UIs for device types.</strong></p>
+<p>Every device—from a basic on/off switch to a complex thermostat—renders through a Lua module downloaded from the registry. CSA provides standard Lua modules for all standard device types.</p>
+<h3 id="why-this-matters">Why This Matters</h3>
+<p>Consider two alternatives:</p>
+<p><strong>Alternative A: Platforms have native UIs (REJECTED)</strong></p>
+<img src="http://www.plantuml.com/plantuml/svg/TL5DQy904BtlhnZifONcK8yUYX-9O54HiJrvcPX9ihYx4tOdIYdzxzseBThIFIoFUH-yOOP1q4jhZGfxxHhqQ277tRxotBfYmeOz76ijTCKNL69hPCfEbcW9HbxZjT_JJj1LXiQ_WkwcqqcQzfLeCT5cXBn3qOU81x0yezTPWFjrzf9DDbdweDHF6FHM1gLaRs7KD3tuK13V5Nq9cEkgbXZJ0mnmZd_wHxgfoLk-rVPFMiT2aBC8M-3oEsO0urOR0Us40Pj6VTxqUoDNn2rj6mJMsMonccUBRBdPEZgGVvTQkofQOTxYrYL94Zz8TLcI9oUmuuAWGQcxySpjs0KTf6Dogl6WsNV4WZt1aVt-4Mm7yxOAf_ADvzoGLUfI5PA2Zovv_Y4ks_sP3sFfUFul" alt="uml diagram">
+<p><strong>Alternative B: ALL UI is Lua modules (CHOSEN)</strong></p>
+<img src="http://www.plantuml.com/plantuml/svg/PL9BIoD14BxFhoZYHTaTlCdgOSa3HI74HNS58R1KqZKpJNggGasrEOZ_tHedIjG-D7HzZwwlkiUTeLfkKz5j8czHiOKLhZUrIkOmaoGAkoOQ7U21Aip9heHjWIt1H2CUwfNMXbmdcdunEfhzkZoRdHSMBRai6IcZnIU2wGLCvdFuTmEnWtb6E9vTtzvVBawAuiCDHdyIMYNQmcIx7S5p0RuEu5vtbzcYz_J3lHOI2Ew80odfaezl5_D7i2Ps9oF03dIW5Y-Vxl1vS40DfodMZRdANGT-P-6G-EJ6egTDfl_Vg0DMi1Z1IioalO2fM0EerCVxTEF36nbQ2TcFdX_1GswMB9LtI_3UqPwnv5rqfoIrUCgAqBAIYqAWiEIoB7s3-_vTrfx_vrwUXAa7RW9vwZKcV-MEKcJoGVN0Nys30he6DNBz5cH5J5KqxtS_rpB8ZilVmp2-rFQf7VeelUi7w5jvx6N_Uwy0" alt="uml diagram">
+<h3 id="true-code-sharing">True Code Sharing</h3>
+<p>When platforms have native UIs, vendor modules must reimplement everything. The toggle, slider, and color wheel in a vendor module would be <em>different code</em> from the platform's built-in UI—written by different people, with different bugs, potentially different behavior.</p>
+<p>With all-Lua, vendors <strong>fork the CSA standard module code</strong> and add their branding. The vendor module runs standalone—no runtime inheritance, no base class dependencies:</p>
+<ol>
+<li>Download CSA standard module for your device type</li>
+<li>Fork the Lua file</li>
+<li>Add your logo</li>
+<li>Add your special features</li>
+<li>Submit to registry</li>
+</ol>
+<p><strong>The baseline UI code is literally the same code—copied, not reimplemented. Each module runs independently.</strong></p>
+<h3 id="example-how-philips-creates-a-branded-module">Example: How Philips Creates a Branded Module</h3>
+<p><img src="MDUI_vendor_enhancement_flow.png" alt="Vendor Enhancement Flow"></p>
+<p><strong>Step 1: CSA provides the standard color light module</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">-- CSA Standard Extended Color Light Module</span>
+<span class="hljs-comment">-- Device type: 0x010D</span>
+<span class="hljs-keyword">local</span> Module = {
+    name = <span class="hljs-string">"Color Light"</span>,
+    deviceType = <span class="hljs-number">0x010D</span>,
+    version = <span class="hljs-string">"1.0.0"</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Module.render</span><span class="hljs-params">(device, state)</span></span>
+    <span class="hljs-keyword">local</span> onOff = state.OnOff <span class="hljs-keyword">or</span> {}
+    <span class="hljs-keyword">local</span> level = state.LevelControl <span class="hljs-keyword">or</span> {}
+    <span class="hljs-keyword">local</span> color = state.ColorControl <span class="hljs-keyword">or</span> {}
+
+    <span class="hljs-keyword">return</span> UI.Column {
+        spacing = <span class="hljs-number">16</span>,
+        children = {
+            <span class="hljs-comment">-- Power toggle</span>
+            UI.Toggle {
+                value = onOff.onOff <span class="hljs-keyword">or</span> <span class="hljs-literal">false</span>,
+                label = <span class="hljs-string">"Power"</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span></span> Matter.setOnOff(v) <span class="hljs-keyword">end</span>
+            },
+
+            <span class="hljs-comment">-- Brightness slider</span>
+            UI.Slider {
+                value = level.currentLevel <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>,
+                <span class="hljs-built_in">min</span> = <span class="hljs-number">1</span>, <span class="hljs-built_in">max</span> = <span class="hljs-number">254</span>,
+                label = <span class="hljs-string">"Brightness"</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span></span> Matter.setLevel(v) <span class="hljs-keyword">end</span>
+            },
+
+            <span class="hljs-comment">-- Color wheel</span>
+            UI.ColorWheel {
+                hue = color.currentHue <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>,
+                saturation = color.currentSaturation <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(h, s)</span></span> Matter.setColor({hue=h, saturation=s}) <span class="hljs-keyword">end</span>
+            }
+        }
+    }
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">return</span> Module
+</div></code></pre>
+<p><strong>Step 2: Philips copies this code, adds their branding</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">-- Philips Hue Color Light Module</span>
+<span class="hljs-comment">-- FORKED FROM: standard/color_light v1.0.0</span>
+<span class="hljs-keyword">local</span> Module = {
+    name = <span class="hljs-string">"Philips Hue Color Light"</span>,
+    deviceType = <span class="hljs-number">0x100B</span>_0001,      <span class="hljs-comment">-- ← Changed: vendor device type (Philips 0x100B)</span>
+    baseDeviceType = <span class="hljs-number">0x010D</span>,       <span class="hljs-comment">-- ← Added: documents what this extends</span>
+    version = <span class="hljs-string">"1.0.0"</span>,
+
+    branding = {                   <span class="hljs-comment">-- ← Added: vendor branding</span>
+        logo = <span class="hljs-string">"https://cdn.philips-hue.com/logo.png"</span>,
+        accentColor = <span class="hljs-string">"#0066FF"</span>
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Module.render</span><span class="hljs-params">(device, state)</span></span>
+    <span class="hljs-keyword">local</span> onOff = state.OnOff <span class="hljs-keyword">or</span> {}
+    <span class="hljs-keyword">local</span> level = state.LevelControl <span class="hljs-keyword">or</span> {}
+    <span class="hljs-keyword">local</span> color = state.ColorControl <span class="hljs-keyword">or</span> {}
+
+    <span class="hljs-keyword">return</span> UI.Column {
+        spacing = <span class="hljs-number">16</span>,
+        children = {
+            <span class="hljs-comment">-- ↓↓↓ ADDED: Vendor logo ↓↓↓</span>
+            UI.Image { src = Module.branding.logo, height = <span class="hljs-number">24</span> },
+
+            <span class="hljs-comment">-- Power toggle (UNCHANGED from standard)</span>
+            UI.Toggle {
+                value = onOff.onOff <span class="hljs-keyword">or</span> <span class="hljs-literal">false</span>,
+                label = <span class="hljs-string">"Power"</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span></span> Matter.setOnOff(v) <span class="hljs-keyword">end</span>
+            },
+
+            <span class="hljs-comment">-- Brightness slider (UNCHANGED from standard)</span>
+            UI.Slider {
+                value = level.currentLevel <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>,
+                <span class="hljs-built_in">min</span> = <span class="hljs-number">1</span>, <span class="hljs-built_in">max</span> = <span class="hljs-number">254</span>,
+                label = <span class="hljs-string">"Brightness"</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span></span> Matter.setLevel(v) <span class="hljs-keyword">end</span>
+            },
+
+            <span class="hljs-comment">-- Color wheel (UNCHANGED from standard)</span>
+            UI.ColorWheel {
+                hue = color.currentHue <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>,
+                saturation = color.currentSaturation <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(h, s)</span></span> Matter.setColor({hue=h, saturation=s}) <span class="hljs-keyword">end</span>
+            },
+
+            <span class="hljs-comment">-- ↓↓↓ ADDED: Vendor-specific feature ↓↓↓</span>
+            UI.Button {
+                label = <span class="hljs-string">"Hue Scenes"</span>,
+                onClick = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+                    Navigation.openSheet(<span class="hljs-string">"hue_scenes"</span>)
+                <span class="hljs-keyword">end</span>
+            }
+        }
+    }
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">return</span> Module
+</div></code></pre>
+<p><strong>What Philips actually changed:</strong></p>
+<ul>
+<li>3 lines of metadata</li>
+<li>1 line for logo</li>
+<li>5 lines for Scenes button</li>
+<li><strong>Everything else is identical to the standard module</strong></li>
+</ul>
+<h3 id="benefits-of-this-approach">Benefits of This Approach</h3>
+<table>
+<thead>
+<tr>
+<th>Benefit</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vendors get 90% of code for free</strong></td>
+<td>Literally copy-paste the standard module</td>
+</tr>
+<tr>
+<td><strong>Guaranteed consistent baseline</strong></td>
+<td>Same toggle, slider, color wheel code = same behavior</td>
+</tr>
+<tr>
+<td><strong>Updates flow downstream</strong></td>
+<td>When CSA improves standard module, vendors can merge changes</td>
+</tr>
+<tr>
+<td><strong>Lower barrier to entry</strong></td>
+<td>Small vendors ship branded UI in hours, not months</td>
+</tr>
+<tr>
+<td><strong>Platform simplicity</strong></td>
+<td>Platforms only implement Lua runtime + UINode renderer</td>
+</tr>
+<tr>
+<td><strong>No special cases</strong></td>
+<td>Standard and vendor modules use identical code path</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-5-ui-primitives">Part 5: UI Primitives</h1>
+<h2 id="core-primitives-required">Core Primitives (Required)</h2>
+<p>All conforming platforms MUST implement these primitives:</p>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>Purpose</th>
+<th>Key Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Column</code></td>
+<td>Vertical layout</td>
+<td>children, spacing, padding, alignment</td>
+</tr>
+<tr>
+<td><code>Row</code></td>
+<td>Horizontal layout</td>
+<td>children, spacing, alignment</td>
+</tr>
+<tr>
+<td><code>Text</code></td>
+<td>Labels, values</td>
+<td>text, size, weight, color</td>
+</tr>
+<tr>
+<td><code>Toggle</code></td>
+<td>On/Off switch</td>
+<td>value, label, onChange</td>
+</tr>
+<tr>
+<td><code>Slider</code></td>
+<td>Range input</td>
+<td>value, min, max, step, label, onChange</td>
+</tr>
+<tr>
+<td><code>Button</code></td>
+<td>Actions</td>
+<td>label, onClick, variant, icon</td>
+</tr>
+<tr>
+<td><code>Card</code></td>
+<td>Grouped content</td>
+<td>children, title</td>
+</tr>
+<tr>
+<td><code>Icon</code></td>
+<td>Semantic icons</td>
+<td>name, size, color</td>
+</tr>
+<tr>
+<td><code>Spacer</code></td>
+<td>Flexible space</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>Divider</code></td>
+<td>Visual separator</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="extended-primitives-recommended">Extended Primitives (Recommended)</h2>
+<p>Platforms SHOULD implement these for richer device experiences:</p>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>Purpose</th>
+<th>Key Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ColorWheel</code></td>
+<td>Hue/Saturation picker</td>
+<td>hue, saturation, onChange</td>
+</tr>
+<tr>
+<td><code>ColorTemperature</code></td>
+<td>Warm/Cool slider</td>
+<td>mireds, min, max, onChange</td>
+</tr>
+<tr>
+<td><code>SegmentedControl</code></td>
+<td>Mode selection</td>
+<td>value, options, onChange</td>
+</tr>
+<tr>
+<td><code>Tabs</code></td>
+<td>Tabbed content</td>
+<td>tabs, selected</td>
+</tr>
+<tr>
+<td><code>Image</code></td>
+<td>Logos, icons</td>
+<td>src, width, height</td>
+</tr>
+<tr>
+<td><code>ProgressBar</code></td>
+<td>Loading, levels</td>
+<td>value, max</td>
+</tr>
+</tbody>
+</table>
+<h2 id="navigation-primitives-secondary-screens">Navigation Primitives (Secondary Screens)</h2>
+<p>Many devices have features that don't fit on the main control screen—schedules, automation rules, advanced settings. MBX supports secondary screens:</p>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>Purpose</th>
+<th>Key Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Sheet</code></td>
+<td>Modal bottom sheet</td>
+<td>content, title, icon, onClose</td>
+</tr>
+<tr>
+<td><code>IconButton</code></td>
+<td>Compact navigation trigger</td>
+<td>icon, label, onPress</td>
+</tr>
+<tr>
+<td><code>TimePicker</code></td>
+<td>Time selection</td>
+<td>value, onChange, mode</td>
+</tr>
+<tr>
+<td><code>DatePicker</code></td>
+<td>Date selection</td>
+<td>value, onChange</td>
+</tr>
+<tr>
+<td><code>ListItem</code></td>
+<td>Settings row</td>
+<td>title, subtitle, trailing, onPress</td>
+</tr>
+<tr>
+<td><code>Switch</code></td>
+<td>Inline toggle</td>
+<td>value, onChange</td>
+</tr>
+</tbody>
+</table>
+<h2 id="platform-native-rendering">Platform-Native Rendering</h2>
+<p><img src="MDUI_diagram_cross_platform.png" alt="Cross-Platform Rendering"></p>
+<p>Platforms render each primitive using their native UI framework:</p>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>SwiftUI (iOS)</th>
+<th>Compose (Android)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Column</code></td>
+<td><code>VStack</code></td>
+<td><code>Column</code></td>
+</tr>
+<tr>
+<td><code>Row</code></td>
+<td><code>HStack</code></td>
+<td><code>Row</code></td>
+</tr>
+<tr>
+<td><code>Text</code></td>
+<td><code>Text</code></td>
+<td><code>Text</code></td>
+</tr>
+<tr>
+<td><code>Toggle</code></td>
+<td><code>Toggle</code></td>
+<td><code>Switch</code></td>
+</tr>
+<tr>
+<td><code>Slider</code></td>
+<td><code>Slider</code></td>
+<td><code>Slider</code></td>
+</tr>
+<tr>
+<td><code>Button</code></td>
+<td><code>Button</code></td>
+<td><code>Button</code> / <code>FilledTonalButton</code></td>
+</tr>
+<tr>
+<td><code>Card</code></td>
+<td><code>GroupBox</code></td>
+<td><code>Card</code></td>
+</tr>
+<tr>
+<td><code>Icon</code></td>
+<td><code>Image(systemName:)</code></td>
+<td><code>Icon</code> (Material)</td>
+</tr>
+<tr>
+<td><code>ColorWheel</code></td>
+<td>Custom View</td>
+<td>Custom Composable</td>
+</tr>
+<tr>
+<td><code>Tabs</code></td>
+<td><code>TabView</code></td>
+<td><code>TabRow</code> + <code>Pager</code></td>
+</tr>
+<tr>
+<td><code>Sheet</code></td>
+<td><code>UISheetPresentationController</code></td>
+<td><code>ModalBottomSheet</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important:</strong> Platforms control visual styling. A <code>Toggle</code> looks like an iOS toggle on Apple Home, a Material switch on Google Home. Modules define structure and behavior; platforms define appearance. This ensures device UIs feel native on each platform.</p>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-6-custom-clusters">Part 6: Custom Clusters</h1>
+<h2 id="the-challenge">The Challenge</h2>
+<p>Many vendors differentiate through features not covered by standard Matter clusters:</p>
+<ul>
+<li>Philips Hue Entertainment mode (light sync with music/video)</li>
+<li>Ecobee smart sensors and occupancy insights</li>
+<li>Nanoleaf rhythm and touch interactions</li>
+<li>Yale smart lock user management</li>
+</ul>
+<p>These features require <strong>custom clusters</strong>—vendor-specific data and commands.</p>
+<h2 id="how-custom-clusters-work-in-mbx">How Custom Clusters Work in MBX</h2>
+<p>Vendors provide two things:</p>
+<p><strong>1. Schema (JSON)</strong> - Defines how to encode/decode custom cluster data:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"clusters"</span>: {
+    <span class="hljs-attr">"PhilipsHueEntertainment"</span>: {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-number">4294115000</span>,
+      <span class="hljs-attr">"attributes"</span>: {
+        <span class="hljs-attr">"entertainmentMode"</span>: { <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">"type"</span>: <span class="hljs-string">"enum8"</span> },
+        <span class="hljs-attr">"syncActive"</span>: { <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">"type"</span>: <span class="hljs-string">"boolean"</span> }
+      },
+      <span class="hljs-attr">"commands"</span>: {
+        <span class="hljs-attr">"StartSync"</span>: {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"request"</span>: {
+            <span class="hljs-attr">"groupId"</span>: { <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">"type"</span>: <span class="hljs-string">"uint16"</span> },
+            <span class="hljs-attr">"mode"</span>: { <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">"type"</span>: <span class="hljs-string">"enum8"</span> }
+          }
+        },
+        <span class="hljs-attr">"StopSync"</span>: {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+          <span class="hljs-attr">"request"</span>: {}
+        }
+      },
+      <span class="hljs-attr">"enums"</span>: {
+        <span class="hljs-attr">"EntertainmentModeEnum"</span>: {
+          <span class="hljs-attr">"Off"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"Music"</span>: <span class="hljs-number">1</span>,
+          <span class="hljs-attr">"Video"</span>: <span class="hljs-number">2</span>,
+          <span class="hljs-attr">"Game"</span>: <span class="hljs-number">3</span>
+        }
+      }
+    }
+  }
+}
+</div></code></pre>
+<p><strong>2. Lua Module</strong> - Uses custom cluster by name:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Module.render</span><span class="hljs-params">(device, state)</span></span>
+    <span class="hljs-keyword">local</span> entertainment = state.PhilipsHueEntertainment <span class="hljs-keyword">or</span> {}
+    <span class="hljs-keyword">local</span> mode = entertainment.entertainmentMode <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">return</span> UI.SegmentedControl {
+        value = mode,
+        options = {
+            { label = <span class="hljs-string">"Off"</span>, value = <span class="hljs-number">0</span> },
+            { label = <span class="hljs-string">"Music"</span>, value = <span class="hljs-number">1</span> },
+            { label = <span class="hljs-string">"Video"</span>, value = <span class="hljs-number">2</span> }
+        },
+        onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(m)</span></span>
+            Matter.command(<span class="hljs-string">"PhilipsHueEntertainment"</span>, <span class="hljs-string">"StartSync"</span>, {
+                groupId = <span class="hljs-number">1</span>, mode = m
+            })
+        <span class="hljs-keyword">end</span>
+    }
+<span class="hljs-keyword">end</span>
+</div></code></pre>
+<h2 id="platform-as-gatekeeper">Platform as Gatekeeper</h2>
+<p>The Lua module uses human-readable names. The platform's schema engine handles the mapping:</p>
+<img src="http://www.plantuml.com/plantuml/svg/NL7BIWD14BpFLpJhHK6NR8o24uHe7Xg84eXuyjBETBB3xiuiipsH87w5Lx_EBt7MH0tUcgwghYfwq31w3bKfciBO6ZrMy8ogM7aNh1wwqdbuoGtJ7gvfYQ7aYRDyZnN1bJUuhqV5PcruS_tlpi7uTDATZ0GRBWdc9VBI-KXlu0QP2gAQl11o5b327JAJJvMhAhJwC9ddfZHrSnjeR2F0Q6n5bfFZ9viisWgBZLN9CRosXlLKNsPlHtqXVqma93DYY65LJge0pWcQE5QOfcdI5zOnWJUhd0N02GpBq4GNc8wWrxtePTbPfzE1pu_tBReDrQ9_ox5LJjElluHWB6VdCGUmWuVPupUJegpr4d9R469sLKXOj41yXTNezQuyxCgtUarhewWl1f4Nd_K5" alt="uml diagram">
+<p>Every interaction with the outside world goes through platform-controlled APIs. The vendor can implement arbitrary UI logic but cannot escape the sandbox.</p>
+<h2 id="what-makes-this-safe">What Makes This Safe</h2>
+<p>The Lua sandbox allows:</p>
+<table>
+<thead>
+<tr>
+<th>Allowed</th>
+<th>Blocked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Return UI node tree</td>
+<td>Access file system</td>
+</tr>
+<tr>
+<td>Call <code>Matter.command()</code></td>
+<td>Make network requests</td>
+</tr>
+<tr>
+<td>Read <code>state</code> (device attributes)</td>
+<td>Access device sensors</td>
+</tr>
+<tr>
+<td>Basic Lua logic (if/for/functions)</td>
+<td>Import external libraries</td>
+</tr>
+<tr>
+<td>Call <code>L()</code> for localization</td>
+<td>Access other apps/processes</td>
+</tr>
+</tbody>
+</table>
+<p>This is exactly how WidgetKit works: widget code runs but can only return views and request timeline updates—no arbitrary network or file access.</p>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-7-security-model">Part 7: Security Model</h1>
+<p><img src="MDUI_diagram_security.png" alt="Security Architecture"></p>
+<h2 id="threat-model">Threat Model</h2>
+<p>MBX modules are code that executes on user devices within platform apps. The security model addresses:</p>
+<ol>
+<li><strong>Malicious vendors</strong> - Intentionally harmful modules</li>
+<li><strong>Compromised vendors</strong> - Legitimate vendors whose signing keys are stolen</li>
+<li><strong>Supply chain attacks</strong> - Tampering during distribution</li>
+<li><strong>Resource exhaustion</strong> - Modules consuming excessive CPU/memory</li>
+<li><strong>Data exfiltration</strong> - Modules leaking user data</li>
+<li><strong>Privilege escalation</strong> - Modules accessing resources beyond scope</li>
+</ol>
+<h2 id="security-architecture">Security Architecture</h2>
+<h3 id="1-sandboxed-execution">1. Sandboxed Execution</h3>
+<p>Modules execute in a restricted Lua VM:</p>
+<p><strong>No access to:</strong></p>
+<ul>
+<li>File system</li>
+<li>Network (beyond Matter commands)</li>
+<li>Device sensors (camera, microphone, GPS)</li>
+<li>Other apps or processes</li>
+<li>System APIs</li>
+</ul>
+<p><strong>Access only to:</strong></p>
+<ul>
+<li>Device state (attributes from Matter subscription)</li>
+<li>Matter command API (send commands to the device)</li>
+<li>UI primitive API (describe UI structure)</li>
+<li>Localization strings (bundled with module)</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">-- These are the ONLY globals available to modules:</span>
+UI = { Column, Row, Text, Toggle, Slider, ... }  <span class="hljs-comment">-- UI primitives</span>
+Matter = { setOnOff, setLevel, command, ... }    <span class="hljs-comment">-- Matter commands</span>
+L = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(key)</span></span> ... <span class="hljs-keyword">end</span>                         <span class="hljs-comment">-- Localization</span>
+device = { id, name, deviceTypes, ... }          <span class="hljs-comment">-- Device metadata</span>
+state = { OnOff = {...}, ... }                    <span class="hljs-comment">-- Current state</span>
+</div></code></pre>
+<h3 id="2-module-signing-leveraging-existing-csa-pki">2. Module Signing (Leveraging Existing CSA PKI)</h3>
+<p>Vendors already have signing key pairs at CSA for Matter device certification. MBX reuses this infrastructure—no new PKI required.</p>
+<img src="http://www.plantuml.com/plantuml/svg/NL2nReD03Dtv2YjTqY5BktMeGaYGEgH3MJgm78U1Kmwxylb2Fhy7hIBQpNf-x_azxuCQqJZwB5mSVHan8pJ6NdhXI6t1dWMcmIckzYrs9dejcVJTZ0YvEBFM2rerr7iy_3DwE3sNJ-KnKwSUuNHpGHtrK5Gvl54d9gX4gr4mo-uUi9dN7ymAHRu14q3IRCsQSSIhioc7AgOwwfXgskAl_UCYQXVAMdG-VCAPs-YnfihrD2VP4au__B6vfH3B9TYrFD7kzUxn5vsPn8eWhXyKk9kH5wZcproHsjJRecXD8Hq9qB0EsJxXwUVV" alt="uml diagram">
+<p><strong>Module Package:</strong></p>
+<pre class="hljs"><code><div>├── module.lua          (the code)
+├── schema.json         (cluster definitions)
+├── strings/            (localization)
+├── manifest.json       (metadata: deviceType, version)
+└── signature.sig       (signed with existing CSA vendor key)
+</div></code></pre>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>No new key ceremony for vendors</li>
+<li>Vendor ID embedded in 32-bit device type (upper 16 bits)</li>
+<li>Revocation already handled by CSA</li>
+<li>Vendors already understand the process</li>
+</ul>
+<h3 id="3-csa-module-registry">3. CSA Module Registry</h3>
+<p><img src="MDUI_diagram_registry_caching.png" alt="Registry and Caching"></p>
+<p>Central registry for certified modules, indexed by device type:</p>
+<pre class="hljs"><code><div>GET /modules/0x100B_0001
+
+Returns:
+{
+  &quot;deviceType&quot;: &quot;0x100B_0001&quot;,
+  &quot;moduleUrl&quot;: &quot;https://registry.csa.io/modules/...&quot;,
+  &quot;version&quot;: &quot;1.2.0&quot;,
+  &quot;signature&quot;: &quot;...&quot;,
+  &quot;vendorCert&quot;: &quot;...&quot;,
+  &quot;certifiedAt&quot;: &quot;2025-01-15T...&quot;,
+  &quot;expiresAt&quot;: &quot;2026-01-15T...&quot;
+}
+</div></code></pre>
+<p><strong>Caching Strategy:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First device commission</td>
+<td>Fetch module, cache locally</td>
+</tr>
+<tr>
+<td>App launch</td>
+<td>Use cached module immediately</td>
+</tr>
+<tr>
+<td>Background (daily)</td>
+<td>Check for updates</td>
+</tr>
+<tr>
+<td>Device offline</td>
+<td>Cached module still works</td>
+</tr>
+</tbody>
+</table>
+<p>Modules are small (typically &lt;50KB), so caching is cheap.</p>
+<h3 id="4-certification-process">4. Certification Process</h3>
+<p>Before a module is listed:</p>
+<ol>
+<li><strong>Automated analysis</strong> - Static code analysis, resource profiling, API verification</li>
+<li><strong>Runtime testing</strong> - Execute in test environment, verify rendering</li>
+<li><strong>Human review</strong> - For new vendors or significant changes</li>
+<li><strong>Certification issuance</strong> - Module signed, listed in registry</li>
+</ol>
+<h3 id="5-resource-limits">5. Resource Limits</h3>
+<p>Platforms enforce limits per module:</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Limit</th>
+<th>Action on Exceed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU time per render</td>
+<td>50ms</td>
+<td>Terminate, show error</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>10MB</td>
+<td>Terminate, show error</td>
+</tr>
+<tr>
+<td>Render frequency</td>
+<td>60/sec</td>
+<td>Throttle</td>
+</tr>
+<tr>
+<td>UI node count</td>
+<td>500</td>
+<td>Truncate</td>
+</tr>
+<tr>
+<td>Network calls</td>
+<td>0</td>
+<td>Block</td>
+</tr>
+<tr>
+<td>File access</td>
+<td>0</td>
+<td>Block</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-revocation">6. Revocation</h3>
+<p>If a module is malicious:</p>
+<ol>
+<li>Module removed from registry</li>
+<li>Vendor cert added to CRL</li>
+<li>Platforms notified</li>
+<li>Platforms stop loading revoked modules</li>
+<li>Cached copies deleted</li>
+</ol>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-8-versioning-and-compatibility">Part 8: Versioning and Compatibility</h1>
+<p><img src="MDUI_diagram_versioning.png" alt="Versioning and Compatibility"></p>
+<h2 id="the-challenge">The Challenge</h2>
+<p>MBX will evolve. New primitives will be added. APIs will expand. How do we ensure:</p>
+<ul>
+<li>Old modules keep working on new platforms?</li>
+<li>New modules gracefully degrade on old platforms?</li>
+<li>Vendors can adopt new features without breaking compatibility?</li>
+</ul>
+<h2 id="runtime-versions">Runtime Versions</h2>
+<p>MBX uses a <strong>runtime version</strong> system:</p>
+<img src="http://www.plantuml.com/plantuml/svg/fPAnJiCm441tVyKfp46GR0oeJY2mm40bfYn7VGIhiHtPZaf1V0C3At_17_4bE26eIKLXg1TBT_VUdNMUEO_MjwfcRYbrWnOLtE5YMLdJQf6RsbXOFKXFexoWUsnhNnZjhr4HS2jnp3U1nugoBSt1ULeanHdpqjS4DwtsCi2tP9qq6kPhvqanDi0GvNCELqQqNIrLqdcxZk2PGJYM5Xvr5JBHKC5BhQGUd2TmV7WK0JfGHl0TH3ObaWsHxI3oAP5kY9ozC3O2UDE4wz8eAdKSn-KFrCq5d-zlcq2o7KY_0xqPEytOUs5CjPVuzQCNLxrdCh72fx04NjCZxgN6pi3OxzkBXLdf-7HusDyrmup_YFfkCz8Y_E0l" alt="uml diagram">
+<h3 id="module-version-declaration">Module Version Declaration</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">local</span> Module = {
+    name = <span class="hljs-string">"Philips Hue Color Light"</span>,
+    version = <span class="hljs-string">"2.1.0"</span>,              <span class="hljs-comment">-- Module's own version</span>
+    deviceType = <span class="hljs-number">0x100B</span>_0001,       <span class="hljs-comment">-- Vendor device type (Philips 0x100B)</span>
+    minRuntimeVersion = <span class="hljs-string">"2.0"</span>,      <span class="hljs-comment">-- Minimum MBX runtime required</span>
+
+    requiredPrimitives = { <span class="hljs-string">"Toggle"</span>, <span class="hljs-string">"Slider"</span>, <span class="hljs-string">"ColorWheel"</span> },
+    optionalPrimitives = { <span class="hljs-string">"ColorTemperatureArc"</span> }  <span class="hljs-comment">-- Falls back if missing</span>
+}
+</div></code></pre>
+<h3 id="runtime-version-contents">Runtime Version Contents</h3>
+<p>Each runtime version defines:</p>
+<table>
+<thead>
+<tr>
+<th>Runtime</th>
+<th>Key Additions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1.0</strong></td>
+<td>Core primitives (Toggle, Slider, Button, etc.), basic Matter API</td>
+</tr>
+<tr>
+<td><strong>2.0</strong></td>
+<td>ColorWheel, ColorTemperature, Tabs, enhanced Matter API</td>
+</tr>
+<tr>
+<td><strong>3.0</strong></td>
+<td>Animation support, conditional visibility, nested navigation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="compatibility-guarantees">Compatibility Guarantees</h3>
+<p><strong>For Platforms:</strong></p>
+<ul>
+<li>MUST support at least 3 major runtime versions simultaneously</li>
+<li>MAY drop support for versions older than 5 years</li>
+</ul>
+<p><strong>For Modules:</strong></p>
+<ul>
+<li>Modules targeting runtime 1.0 will work on runtime 2.0, 3.0, etc. (forward compatible)</li>
+<li>Modules can declare <code>minRuntimeVersion</code> to require newer features</li>
+</ul>
+<h3 id="graceful-degradation">Graceful Degradation</h3>
+<p>If a module uses a primitive the platform doesn't support:</p>
+<ol>
+<li>Platform checks <code>optionalPrimitives</code> - skip if optional</li>
+<li>Platform substitutes fallback (e.g., <code>ColorWheel</code> → two Sliders for hue/saturation)</li>
+<li>Platform shows warning if required primitive missing</li>
+</ol>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-9-standard-module-library">Part 9: Standard Module Library</h1>
+<p>CSA provides Lua modules for ALL standard Matter device types. These serve two purposes:</p>
+<ol>
+<li><strong>Direct use</strong> - Devices without vendor-specific types get full-featured UI automatically</li>
+<li><strong>Vendor templates</strong> - Vendors fork these modules to add branding and features</li>
+</ol>
+<h2 id="reference-modules-by-category">Reference Modules by Category</h2>
+<h3 id="lighting-6-types">Lighting (6 types)</h3>
+<table>
+<thead>
+<tr>
+<th>Device Type</th>
+<th>ID</th>
+<th>Clusters</th>
+<th>Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On/Off Light</td>
+<td>0x0100</td>
+<td>OnOff</td>
+<td><code>standard/onoff_light</code></td>
+</tr>
+<tr>
+<td>Dimmable Light</td>
+<td>0x0101</td>
+<td>OnOff, LevelControl</td>
+<td><code>standard/dimmable_light</code></td>
+</tr>
+<tr>
+<td>Color Temperature Light</td>
+<td>0x010C</td>
+<td>OnOff, LevelControl, ColorControl</td>
+<td><code>standard/color_temp_light</code></td>
+</tr>
+<tr>
+<td>Extended Color Light</td>
+<td>0x010D</td>
+<td>OnOff, LevelControl, ColorControl</td>
+<td><code>standard/color_light</code></td>
+</tr>
+<tr>
+<td>On/Off Plug-in Unit</td>
+<td>0x010A</td>
+<td>OnOff</td>
+<td><code>standard/onoff_plug</code></td>
+</tr>
+<tr>
+<td>Dimmable Plug-in Unit</td>
+<td>0x010B</td>
+<td>OnOff, LevelControl</td>
+<td><code>standard/dimmable_plug</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="sensors-9-types">Sensors (9 types)</h3>
+<table>
+<thead>
+<tr>
+<th>Device Type</th>
+<th>ID</th>
+<th>Clusters</th>
+<th>Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Temperature Sensor</td>
+<td>0x0302</td>
+<td>TemperatureMeasurement</td>
+<td><code>standard/temperature_sensor</code></td>
+</tr>
+<tr>
+<td>Humidity Sensor</td>
+<td>0x0307</td>
+<td>RelativeHumidityMeasurement</td>
+<td><code>standard/humidity_sensor</code></td>
+</tr>
+<tr>
+<td>Occupancy Sensor</td>
+<td>0x0107</td>
+<td>OccupancySensing</td>
+<td><code>standard/occupancy_sensor</code></td>
+</tr>
+<tr>
+<td>Contact Sensor</td>
+<td>0x0015</td>
+<td>BooleanState</td>
+<td><code>standard/contact_sensor</code></td>
+</tr>
+<tr>
+<td>Light Sensor</td>
+<td>0x0106</td>
+<td>IlluminanceMeasurement</td>
+<td><code>standard/light_sensor</code></td>
+</tr>
+<tr>
+<td>Pressure Sensor</td>
+<td>0x0305</td>
+<td>PressureMeasurement</td>
+<td><code>standard/pressure_sensor</code></td>
+</tr>
+<tr>
+<td>Flow Sensor</td>
+<td>0x0306</td>
+<td>FlowMeasurement</td>
+<td><code>standard/flow_sensor</code></td>
+</tr>
+<tr>
+<td>Water Leak Detector</td>
+<td>0x0043</td>
+<td>BooleanState</td>
+<td><code>standard/water_leak</code></td>
+</tr>
+<tr>
+<td>Smoke CO Alarm</td>
+<td>0x0076</td>
+<td>SmokeCoAlarm</td>
+<td><code>standard/smoke_alarm</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="hvac-2-types">HVAC (2 types)</h3>
+<table>
+<thead>
+<tr>
+<th>Device Type</th>
+<th>ID</th>
+<th>Clusters</th>
+<th>Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thermostat</td>
+<td>0x0301</td>
+<td>Thermostat</td>
+<td><code>standard/thermostat</code></td>
+</tr>
+<tr>
+<td>Fan</td>
+<td>0x002B</td>
+<td>FanControl</td>
+<td><code>standard/fan</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="closures-2-types">Closures (2 types)</h3>
+<table>
+<thead>
+<tr>
+<th>Device Type</th>
+<th>ID</th>
+<th>Clusters</th>
+<th>Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Door Lock</td>
+<td>0x000A</td>
+<td>DoorLock</td>
+<td><code>standard/door_lock</code></td>
+</tr>
+<tr>
+<td>Window Covering</td>
+<td>0x0202</td>
+<td>WindowCovering</td>
+<td><code>standard/window_covering</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-10-governance-and-adoption">Part 10: Governance and Adoption</h1>
+<h2 id="csa-working-group-structure">CSA Working Group Structure</h2>
+<img src="http://www.plantuml.com/plantuml/svg/LL3BQiD03BphAqJk-OMInD3IGtke3oc47fIrThjaNsXbIYZzzwvjYbsTD3FCZD2XAecECK2z-LH8AEALpCr97jFGvP05lpwzyaOVsD8Oz34dVQN8U1HFMx_9iUJ4INkz1qPXevHSO81Brn_nb4c63wIArsa3i3Abx5vExtZEqc8SFhNwiiDlm3QNlh3nrXjIdzFih8rPj8v5_skcCOlsnivNbVjC2xi_rk9pB85ZEt6r2Llu0PXlmlt-OUbOuHoxmYbkYomSE0tjaRy0" alt="uml diagram">
+<h2 id="vendor-participation">Vendor Participation</h2>
+<p>Since vendors already have CSA credentials for Matter certification, MBX participation is simple:</p>
+<ol>
+<li>✅ Already a CSA member (existing)</li>
+<li>✅ Already have signing key pair (existing)</li>
+<li>Register for MBX program (administrative only)</li>
+<li>Accept MBX terms of service</li>
+<li>Begin submitting modules</li>
+</ol>
+<p><strong>No new keys, no new verification, no new fees—just an opt-in.</strong></p>
+<h2 id="platform-adoption-phases">Platform Adoption Phases</h2>
+<h3 id="phase-1-custom-cluster-support">Phase 1: Custom Cluster Support</h3>
+<p>Platforms implement MBX runtime to support devices with vendor-specific clusters.</p>
+<p><strong>Trigger:</strong> Device has clusters not in platform's UI library
+<strong>Benefit:</strong> Immediate support for devices that currently require vendor apps</p>
+<h3 id="phase-2-vendor-branding">Phase 2: Vendor Branding</h3>
+<p>Platforms load MBX modules for devices with vendor-specific device types.</p>
+<p><strong>Trigger:</strong> Vendor provides branded module
+<strong>Benefit:</strong> Vendors differentiate within platform apps</p>
+<h3 id="phase-3-full-mbx">Phase 3: Full MBX</h3>
+<p>Platforms transition all device UIs to MBX rendering.</p>
+<p><strong>Trigger:</strong> Platform strategic decision
+<strong>Benefit:</strong> Consistent architecture, automatic new device type support</p>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-11-reference-implementation">Part 11: Reference Implementation</h1>
+<h2 id="deliverables">Deliverables</h2>
+<p>CSA will provide:</p>
+<h3 id="1-platform-runtime-libraries">1. Platform Runtime Libraries</h3>
+<p><strong>iOS (Swift)</strong></p>
+<ul>
+<li>Luau VM integration</li>
+<li>UINode → SwiftUI renderer</li>
+<li>Matter bridge</li>
+<li>Module loader with caching</li>
+<li>Security sandbox</li>
+</ul>
+<p><strong>Android (Kotlin)</strong></p>
+<ul>
+<li>Luau VM integration (JNI)</li>
+<li>UINode → Compose renderer</li>
+<li>Matter bridge</li>
+<li>Module loader with caching</li>
+<li>Security sandbox</li>
+</ul>
+<h3 id="2-module-development-sdk">2. Module Development SDK</h3>
+<ul>
+<li>Module template generator</li>
+<li>Local testing harness</li>
+<li>Schema validator</li>
+<li>Certification pre-check</li>
+<li>Simulator for all platforms</li>
+</ul>
+<h3 id="3-registry-infrastructure">3. Registry Infrastructure</h3>
+<ul>
+<li>Module hosting</li>
+<li>Certification pipeline</li>
+<li>API for platform queries</li>
+<li>Vendor portal</li>
+<li>Analytics dashboard</li>
+</ul>
+<h2 id="timeline">Timeline</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Deliverable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specification Draft</td>
+<td>Complete MBX spec</td>
+</tr>
+<tr>
+<td>Reference Implementation</td>
+<td>iOS + Android runtimes</td>
+</tr>
+<tr>
+<td>Pilot Program</td>
+<td>10 vendors, 2 platforms</td>
+</tr>
+<tr>
+<td>Public Launch</td>
+<td>Registry opens, spec finalized</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="part-12-known-complexities-deferred">Part 12: Known Complexities (Deferred)</h1>
+<p>The following topics require detailed specification work but are intentionally deferred. They do not block the core architecture.</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Groups</strong></td>
+<td>How does a module render UI for a group of devices? May require group-aware render function.</td>
+</tr>
+<tr>
+<td><strong>Scenes</strong></td>
+<td>Scene creation/editing. Platform may handle; modules render individual devices.</td>
+</tr>
+<tr>
+<td><strong>Multi-endpoint devices</strong></td>
+<td>Power strip with 4 outlets. Module receives endpoint list, renders sub-UIs.</td>
+</tr>
+<tr>
+<td><strong>Bridged devices</strong></td>
+<td>Transparent to modules—bridge exposes standard endpoints.</td>
+</tr>
+<tr>
+<td><strong>Offline behavior</strong></td>
+<td>Module receives <code>device.online</code> flag; platform handles offline states.</td>
+</tr>
+<tr>
+<td><strong>Commissioning UI</strong></td>
+<td>Device-specific setup flows. Separate module type or platform handles generically.</td>
+</tr>
+<tr>
+<td><strong>Firmware update UI</strong></td>
+<td>Platform responsibility; standard OTA cluster.</td>
+</tr>
+<tr>
+<td><strong>Accessibility</strong></td>
+<td>Platform applies accessibility to rendered primitives.</td>
+</tr>
+</tbody>
+</table>
+<p>These will be addressed in subsequent specification drafts.</p>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="the-ask">The Ask</h1>
+<h2 id="establish-the-mbx-working-group">Establish the MBX Working Group</h2>
+<p>We propose the CSA establish a working group to develop the Matter Brand Experience specification, with:</p>
+<ol>
+<li>Review of this technical proposal</li>
+<li>Input from platform vendors (Apple, Google, Amazon, Samsung)</li>
+<li>Input from device vendors (Philips, Eve, Yale, Nanoleaf, etc.)</li>
+<li>Development of formal specification</li>
+<li>Reference implementations for iOS and Android</li>
+</ol>
+<h2 id="why-now">Why Now</h2>
+<ol>
+<li><strong>Matter adoption is accelerating</strong> - Billions of devices expected by 2027</li>
+<li><strong>User frustration is mounting</strong> - App fatigue limits smart home adoption</li>
+<li><strong>Vendors want relief</strong> - Mobile app development is expensive and distracting</li>
+<li><strong>Platforms are ready</strong> - SwiftUI, Compose make native rendering easy</li>
+<li><strong>The architecture is proven</strong> - WidgetKit, server-driven UI at Airbnb/Netflix/Shopify</li>
+</ol>
+<h2 id="the-vision">The Vision</h2>
+<p><strong>One module. Every platform. Full branding.</strong></p>
+<ul>
+<li>Users pick ONE app and get EVERYTHING</li>
+<li>Vendors reach EVERY platform without building apps</li>
+<li>Platforms get richer ecosystems without engineering work</li>
+<li>CSA controls the pace of innovation</li>
+</ul>
+<p><strong>Matter promised interoperability. MBX delivers it.</strong></p>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="appendix-a-sample-modules">Appendix A: Sample Modules</h1>
+<h2 id="a1-thermostat-module-standard">A.1 Thermostat Module (Standard)</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">local</span> Module = {
+    name = <span class="hljs-string">"Thermostat"</span>,
+    deviceType = <span class="hljs-number">0x0301</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Module.render</span><span class="hljs-params">(device, state)</span></span>
+    <span class="hljs-keyword">local</span> thermo = state.Thermostat <span class="hljs-keyword">or</span> {}
+
+    <span class="hljs-keyword">local</span> currentTemp = thermo.localTemperature
+    <span class="hljs-keyword">local</span> displayTemp = currentTemp <span class="hljs-keyword">and</span> <span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">"%.1f°"</span>, currentTemp / <span class="hljs-number">100</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">"--"</span>
+
+    <span class="hljs-keyword">local</span> mode = thermo.systemMode <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>
+    <span class="hljs-keyword">local</span> heatSetpoint = (thermo.occupiedHeatingSetpoint <span class="hljs-keyword">or</span> <span class="hljs-number">2000</span>) / <span class="hljs-number">100</span>
+    <span class="hljs-keyword">local</span> coolSetpoint = (thermo.occupiedCoolingSetpoint <span class="hljs-keyword">or</span> <span class="hljs-number">2600</span>) / <span class="hljs-number">100</span>
+
+    <span class="hljs-keyword">local</span> isHeating = (thermo.thermostatRunningState <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) &amp; <span class="hljs-number">0x01</span> ~= <span class="hljs-number">0</span>
+    <span class="hljs-keyword">local</span> isCooling = (thermo.thermostatRunningState <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) &amp; <span class="hljs-number">0x02</span> ~= <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">return</span> UI.Column {
+        spacing = <span class="hljs-number">16</span>,
+        children = {
+            <span class="hljs-comment">-- Current temperature</span>
+            UI.Card {
+                children = {
+                    UI.Column {
+                        alignment = <span class="hljs-string">"center"</span>,
+                        children = {
+                            UI.Text { text = displayTemp, size = <span class="hljs-number">64</span>, weight = <span class="hljs-string">"bold"</span> },
+                            UI.Text {
+                                text = isHeating <span class="hljs-keyword">and</span> <span class="hljs-string">"Heating"</span> <span class="hljs-keyword">or</span> (isCooling <span class="hljs-keyword">and</span> <span class="hljs-string">"Cooling"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"Idle"</span>),
+                                color = <span class="hljs-string">"secondary"</span>
+                            }
+                        }
+                    }
+                }
+            },
+
+            <span class="hljs-comment">-- Mode selector</span>
+            UI.SegmentedControl {
+                value = mode,
+                options = {
+                    { label = <span class="hljs-string">"Off"</span>, value = <span class="hljs-number">0</span> },
+                    { label = <span class="hljs-string">"Heat"</span>, value = <span class="hljs-number">4</span> },
+                    { label = <span class="hljs-string">"Cool"</span>, value = <span class="hljs-number">3</span> },
+                    { label = <span class="hljs-string">"Auto"</span>, value = <span class="hljs-number">1</span> }
+                },
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(m)</span></span>
+                    Matter.writeAttribute(<span class="hljs-string">"Thermostat"</span>, <span class="hljs-string">"systemMode"</span>, m)
+                <span class="hljs-keyword">end</span>
+            },
+
+            <span class="hljs-comment">-- Heat setpoint (shown in Heat or Auto mode)</span>
+            (mode == <span class="hljs-number">4</span> <span class="hljs-keyword">or</span> mode == <span class="hljs-number">1</span>) <span class="hljs-keyword">and</span> UI.Slider {
+                value = heatSetpoint,
+                <span class="hljs-built_in">min</span> = <span class="hljs-number">7</span>, <span class="hljs-built_in">max</span> = <span class="hljs-number">30</span>,
+                step = <span class="hljs-number">0.5</span>,
+                label = <span class="hljs-string">"Heat to"</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span></span>
+                    Matter.writeAttribute(<span class="hljs-string">"Thermostat"</span>, <span class="hljs-string">"occupiedHeatingSetpoint"</span>, v * <span class="hljs-number">100</span>)
+                <span class="hljs-keyword">end</span>
+            },
+
+            <span class="hljs-comment">-- Cool setpoint (shown in Cool or Auto mode)</span>
+            (mode == <span class="hljs-number">3</span> <span class="hljs-keyword">or</span> mode == <span class="hljs-number">1</span>) <span class="hljs-keyword">and</span> UI.Slider {
+                value = coolSetpoint,
+                <span class="hljs-built_in">min</span> = <span class="hljs-number">16</span>, <span class="hljs-built_in">max</span> = <span class="hljs-number">32</span>,
+                step = <span class="hljs-number">0.5</span>,
+                label = <span class="hljs-string">"Cool to"</span>,
+                onChange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span></span>
+                    Matter.writeAttribute(<span class="hljs-string">"Thermostat"</span>, <span class="hljs-string">"occupiedCoolingSetpoint"</span>, v * <span class="hljs-number">100</span>)
+                <span class="hljs-keyword">end</span>
+            }
+        }
+    }
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">return</span> Module
+</div></code></pre>
+<div style="page-break-after: always;"></div>
+<h2 id="a2-door-lock-module-standard">A.2 Door Lock Module (Standard)</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">local</span> Module = {
+    name = <span class="hljs-string">"Door Lock"</span>,
+    deviceType = <span class="hljs-number">0x000A</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Module.render</span><span class="hljs-params">(device, state)</span></span>
+    <span class="hljs-keyword">local</span> lock = state.DoorLock <span class="hljs-keyword">or</span> {}
+
+    <span class="hljs-keyword">local</span> lockState = lock.lockState
+    <span class="hljs-keyword">local</span> isLocked = lockState == <span class="hljs-number">1</span>
+    <span class="hljs-keyword">local</span> isUnlocked = lockState == <span class="hljs-number">2</span>
+
+    <span class="hljs-keyword">return</span> UI.Column {
+        spacing = <span class="hljs-number">16</span>,
+        children = {
+            <span class="hljs-comment">-- Lock state indicator</span>
+            UI.Card {
+                children = {
+                    UI.Column {
+                        alignment = <span class="hljs-string">"center"</span>,
+                        children = {
+                            UI.Icon {
+                                name = isLocked <span class="hljs-keyword">and</span> <span class="hljs-string">"lock"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"lock_open"</span>,
+                                size = <span class="hljs-number">64</span>,
+                                color = isLocked <span class="hljs-keyword">and</span> <span class="hljs-string">"primary"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"warning"</span>
+                            },
+                            UI.Text {
+                                text = isLocked <span class="hljs-keyword">and</span> <span class="hljs-string">"Locked"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"Unlocked"</span>,
+                                size = <span class="hljs-number">24</span>,
+                                weight = <span class="hljs-string">"bold"</span>
+                            }
+                        }
+                    }
+                }
+            },
+
+            <span class="hljs-comment">-- Control buttons</span>
+            UI.Row {
+                spacing = <span class="hljs-number">16</span>,
+                children = {
+                    UI.Button {
+                        label = <span class="hljs-string">"Lock"</span>,
+                        icon = <span class="hljs-string">"lock"</span>,
+                        variant = isLocked <span class="hljs-keyword">and</span> <span class="hljs-string">"filled"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"outlined"</span>,
+                        flex = <span class="hljs-number">1</span>,
+                        onClick = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+                            Matter.command(<span class="hljs-string">"DoorLock"</span>, <span class="hljs-string">"Lock"</span>, {})
+                        <span class="hljs-keyword">end</span>
+                    },
+                    UI.Button {
+                        label = <span class="hljs-string">"Unlock"</span>,
+                        icon = <span class="hljs-string">"lock_open"</span>,
+                        variant = isUnlocked <span class="hljs-keyword">and</span> <span class="hljs-string">"filled"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"outlined"</span>,
+                        flex = <span class="hljs-number">1</span>,
+                        onClick = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+                            Matter.command(<span class="hljs-string">"DoorLock"</span>, <span class="hljs-string">"Unlock"</span>, {})
+                        <span class="hljs-keyword">end</span>
+                    }
+                }
+            }
+        }
+    }
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">return</span> Module
+</div></code></pre>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="appendix-b-platform-rendering-reference">Appendix B: Platform Rendering Reference</h1>
+<h2 id="ios-swiftui">iOS (SwiftUI)</h2>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">UINodeView</span>: <span class="hljs-title">View</span> </span>{
+    <span class="hljs-keyword">let</span> node: <span class="hljs-type">UINode</span>
+
+    <span class="hljs-keyword">var</span> body: some <span class="hljs-type">View</span> {
+        <span class="hljs-keyword">switch</span> node {
+        <span class="hljs-keyword">case</span> .column(<span class="hljs-keyword">let</span> children, <span class="hljs-keyword">let</span> spacing, <span class="hljs-keyword">let</span> alignment):
+            <span class="hljs-type">VStack</span>(alignment: alignment.toSwiftUI(), spacing: spacing) {
+                <span class="hljs-type">ForEach</span>(children.<span class="hljs-built_in">indices</span>, id: \.<span class="hljs-keyword">self</span>) { i <span class="hljs-keyword">in</span>
+                    <span class="hljs-type">UINodeView</span>(node: children[i])
+                }
+            }
+
+        <span class="hljs-keyword">case</span> .toggle(<span class="hljs-keyword">let</span> value, <span class="hljs-keyword">let</span> label, <span class="hljs-keyword">let</span> onChange):
+            <span class="hljs-type">Toggle</span>(label, isOn: <span class="hljs-type">Binding</span>(
+                <span class="hljs-keyword">get</span>: { value },
+                <span class="hljs-keyword">set</span>: { onChange($<span class="hljs-number">0</span>) }
+            ))
+
+        <span class="hljs-keyword">case</span> .slider(<span class="hljs-keyword">let</span> value, <span class="hljs-keyword">let</span> <span class="hljs-built_in">min</span>, <span class="hljs-keyword">let</span> <span class="hljs-built_in">max</span>, <span class="hljs-keyword">let</span> label, <span class="hljs-keyword">let</span> onChange):
+            <span class="hljs-type">VStack</span>(alignment: .leading) {
+                <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> label = label {
+                    <span class="hljs-type">Text</span>(label)
+                }
+                <span class="hljs-type">Slider</span>(
+                    value: <span class="hljs-type">Binding</span>(<span class="hljs-keyword">get</span>: { value }, <span class="hljs-keyword">set</span>: { onChange($<span class="hljs-number">0</span>) }),
+                    <span class="hljs-keyword">in</span>: <span class="hljs-built_in">min</span>...<span class="hljs-built_in">max</span>
+                )
+            }
+
+        <span class="hljs-keyword">case</span> .button(<span class="hljs-keyword">let</span> label, <span class="hljs-keyword">let</span> variant, <span class="hljs-keyword">let</span> icon, <span class="hljs-keyword">let</span> onClick):
+            <span class="hljs-type">Button</span>(action: onClick) {
+                <span class="hljs-type">Label</span>(label, systemImage: icon ?? <span class="hljs-string">""</span>)
+            }
+            .buttonStyle(variant == <span class="hljs-string">"filled"</span> ? .borderedProminent : .bordered)
+
+        <span class="hljs-comment">// ... additional cases</span>
+        }
+    }
+}
+</div></code></pre>
+<h2 id="android-compose">Android (Compose)</h2>
+<pre class="hljs"><code><div><span class="hljs-meta">@Composable</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">UINodeRenderer</span><span class="hljs-params">(node: <span class="hljs-type">UINode</span>)</span></span> {
+    <span class="hljs-keyword">when</span> (node) {
+        <span class="hljs-keyword">is</span> UINode.Column -&gt; {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(node.spacing.dp),
+                horizontalAlignment = node.alignment.toCompose()
+            ) {
+                node.children.forEach { UINodeRenderer(it) }
+            }
+        }
+
+        <span class="hljs-keyword">is</span> UINode.Toggle -&gt; {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(node.label)
+                Spacer(Modifier.weight(<span class="hljs-number">1f</span>))
+                Switch(
+                    checked = node.value,
+                    onCheckedChange = node.onChange
+                )
+            }
+        }
+
+        <span class="hljs-keyword">is</span> UINode.Slider -&gt; {
+            Column {
+                node.label?.let { Text(it) }
+                Slider(
+                    value = node.value,
+                    onValueChange = node.onChange,
+                    valueRange = node.min..node.max
+                )
+            }
+        }
+
+        <span class="hljs-keyword">is</span> UINode.Button -&gt; {
+            <span class="hljs-keyword">when</span> (node.variant) {
+                <span class="hljs-string">"filled"</span> -&gt; FilledTonalButton(onClick = node.onClick) {
+                    node.icon?.let { Icon(it.toImageVector(), <span class="hljs-literal">null</span>) }
+                    Text(node.label)
+                }
+                <span class="hljs-keyword">else</span> -&gt; OutlinedButton(onClick = node.onClick) {
+                    node.icon?.let { Icon(it.toImageVector(), <span class="hljs-literal">null</span>) }
+                    Text(node.label)
+                }
+            }
+        }
+
+        <span class="hljs-comment">// ... additional cases</span>
+    }
+}
+</div></code></pre>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="appendix-c-glossary">Appendix C: Glossary</h1>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MBX</strong></td>
+<td>Matter Brand Experience - this proposed standard</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>A package containing UI definition, schema, and assets for a device type</td>
+</tr>
+<tr>
+<td><strong>Device Type</strong></td>
+<td>An ID identifying a class of device. Standard types are 16-bit (0x0000-0xFFFE) defined by CSA. Vendor types are 32-bit with vendor ID in upper 16 bits.</td>
+</tr>
+<tr>
+<td><strong>Vendor Device Type</strong></td>
+<td>A 32-bit device type (0xVVVVDDDD) where upper 16 bits are vendor ID and lower 16 bits are device type. Example: 0x100B_0001 = Philips (0x100B) device 0x0001. Triggers vendor-specific UI modules.</td>
+</tr>
+<tr>
+<td><strong>deviceTypeList</strong></td>
+<td>Matter descriptor cluster attribute listing all device types an endpoint supports</td>
+</tr>
+<tr>
+<td><strong>Primitive</strong></td>
+<td>A basic UI component (Toggle, Slider, etc.) that platforms render natively</td>
+</tr>
+<tr>
+<td><strong>UINode</strong></td>
+<td>A node in the declarative UI tree returned by module.render()</td>
+</tr>
+<tr>
+<td><strong>Schema</strong></td>
+<td>Definition of custom clusters, attributes, and commands for TLV encoding</td>
+</tr>
+<tr>
+<td><strong>Registry</strong></td>
+<td>CSA-operated service for discovering and downloading certified modules</td>
+</tr>
+<tr>
+<td><strong>Vendor</strong></td>
+<td>Company that manufactures Matter devices</td>
+</tr>
+<tr>
+<td><strong>Platform</strong></td>
+<td>App that controls Matter devices (Apple Home, Google Home, etc.)</td>
+</tr>
+<tr>
+<td><strong>Luau</strong></td>
+<td>Roblox's typed Lua variant, recommended for MBX modules</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Document History:</strong></p>
+<ul>
+<li>v1.0 (2025-01) - Renamed to MBX (Matter Brand Experience), restructured for accessibility</li>
+<li>v0.2 (2025-01) - Changed module discovery from vendorId+deviceType to vendor-specific device types</li>
+<li>v0.1 (2025-01) - Initial draft for review</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MBX_PRESENTATION.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="matter-brand-experience-mbx">Matter Brand Experience (MBX)</h1>
+<h2 id="your-brand-every-platform-zero-apps">Your Brand. Every Platform. Zero Apps.</h2>
+<h3 id="a-presentation-to-the-connectivity-standards-alliance">A Presentation to the Connectivity Standards Alliance</h3>
+<p><strong>Duration:</strong> 20 minutes</p>
+<div style="page-break-after: always;"></div>
+<h1 id="matter-brand-experience">Matter Brand Experience</h1>
+<h2 id="your-brand-every-platform-zero-apps">Your Brand. Every Platform. Zero Apps.</h2>
+<p><strong>For:</strong> Connectivity Standards Alliance</p>
+<p><img src="matter_logo.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>Opening energy: Start strong. This is about transforming Matter from a protocol standard into a complete user experience standard.</p>
+<p>Key message: &quot;Today I'm going to show you how we can fulfill Matter's original promise—and create massive value for vendors, platforms, and users—with one elegant addition to the ecosystem.&quot;</p>
+<p><em>Timing: 30 seconds</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="the-smart-home-today">The Smart Home Today</h1>
+<p><img src="frustration.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>Let this image speak. Pause and let them look.</p>
+<p>&quot;This is the reality for smart home users today. 6+ apps. Notification chaos. Battery drain. And this person has a SIMPLE smart home.&quot;</p>
+<p>&quot;Every device vendor says 'download our app for the full experience.' So users do. Again and again.&quot;</p>
+<p>Stats to mention:</p>
+<ul>
+<li>Average smart home user has five or six device apps installed</li>
+<li>67% of users cite &quot;too many apps&quot; as their #1 frustration</li>
+<li>Each app requires account creation, learning new UI, managing updates</li>
+</ul>
+<p><em>Timing: 1 minute</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="matters-broken-promise">Matter's Broken Promise</h1>
+<blockquote>
+<p>&quot;Buy any Matter device. Use any app. It just works.&quot;</p>
+</blockquote>
+<p><strong>The Reality:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Platform App Shows</th>
+<th>Full Features Require</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On/Off</td>
+<td>Vendor app</td>
+</tr>
+<tr>
+<td>Brightness</td>
+<td>Vendor app</td>
+</tr>
+<tr>
+<td>Basic temperature</td>
+<td>Vendor app</td>
+</tr>
+<tr>
+<td>Lock/Unlock</td>
+<td>Vendor app</td>
+</tr>
+</tbody>
+</table>
+<p><strong>&quot;For schedules, scenes, and settings... download our app.&quot;</strong></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Matter delivered on the protocol promise. Discovery, commissioning, basic control—all interoperable. That's a huge achievement.&quot;</p>
+<p>&quot;But Matter has NOTHING to say about user interfaces. So what happens?&quot;</p>
+<p>&quot;A Philips Hue bulb in Apple Home? You get on/off and brightness. That's it. Want scenes? Hue Sync? Entertainment mode? Download the Hue app.&quot;</p>
+<p>&quot;An Ecobee thermostat? Basic temperature in Google Home. Want schedules, sensor data, energy reports? Download the Ecobee app.&quot;</p>
+<p>&quot;We standardized the protocol but left the experience fragmented.&quot;</p>
+<p><em>Timing: 1.5 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="the-solution-matter-brand-experience">The Solution: Matter Brand Experience</h1>
+<p><img src="unification.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;What if there was ONE app—whichever app the user prefers—that gave them FULL control of EVERY device, with FULL vendor branding?&quot;</p>
+<p>Point to the image:</p>
+<ul>
+<li>&quot;One Home app icon. That's it.&quot;</li>
+<li>&quot;Every device—lights, thermostat, locks, sensors—fully controllable&quot;</li>
+<li>&quot;Users choose their preferred platform. They're done.&quot;</li>
+</ul>
+<p>&quot;This is Matter Brand Experience. MBX.&quot;</p>
+<p><em>Timing: 1 minute</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="see-it-in-action">See It In Action</h1>
+<p><img src="MDUI_example_screens.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>Walk through each screen LEFT TO RIGHT:</p>
+<ol>
+<li>
+<p>&quot;STANDARD - This is the CSA-provided module. Works for any color light. No branding. Full functionality. This is what you get if a vendor does nothing.&quot;</p>
+</li>
+<li>
+<p>&quot;BRANDED - Philips adds their Hue logo and a 'Hue Scenes' button. Same underlying controls, but now it's THEIR experience. Their brand is in Apple Home, Google Home, Amazon Alexa.&quot;</p>
+</li>
+<li>
+<p>&quot;EXTENDED - A different vendor, Lowpan, adds a schedule indicator. Users see 'Sunset → Sunrise' right on the main screen.&quot;</p>
+</li>
+<li>
+<p>&quot;EXTENDED UI - Tap that schedule indicator, a native bottom sheet opens with full scheduling controls.&quot;</p>
+</li>
+</ol>
+<p>&quot;All four screens render with NATIVE iOS components. On Android, they'd use native Material Design. The platform controls the look and feel. The vendor controls the CONTENT.&quot;</p>
+<p><em>Timing: 2 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="your-brand-every-platform">Your Brand. Every Platform.</h1>
+<p><img src="branded.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Look at this. Apple Home. Google Home. Amazon Alexa. THREE different platforms.&quot;</p>
+<p>&quot;Same Philips branding. Same 'hue' logo. Same PHILIPS in the control. Identical experience.&quot;</p>
+<p>&quot;For vendors, this is the dream: your brand presence in EVERY major smart home platform, without building and maintaining THREE separate apps.&quot;</p>
+<p>&quot;For platforms, the ecosystem gets richer without any work on their part.&quot;</p>
+<p>&quot;For users, they don't care which platform they chose—they get the full Philips Hue experience regardless.&quot;</p>
+<p><em>Timing: 1.5 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="how-easy-is-it">How Easy Is It?</h1>
+<p><img src="workflow.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Here's what vendors actually do:&quot;</p>
+<ol>
+<li>
+<p>&quot;FORK - Download the CSA standard module for your device type. It's Lua code—simple, readable, about 100 lines for a typical device.&quot;</p>
+</li>
+<li>
+<p>&quot;BRAND - Add your logo. Add your colors. Add your special features. The standard controls are already there—you're EXTENDING, not rebuilding.&quot;</p>
+</li>
+<li>
+<p>&quot;SUBMIT - Upload to the CSA registry. Automated testing, certification, signing. Same process vendors already know from Matter certification.&quot;</p>
+</li>
+<li>
+<p>&quot;DONE - Your branded UI is live on every platform. No app store reviews. No platform-specific builds. Just... done.&quot;</p>
+</li>
+</ol>
+<p>&quot;A competent developer can do this in a DAY. Not months. Not weeks. A day.&quot;</p>
+<p><em>Timing: 1.5 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="who-wins-device-vendors">Who Wins: Device Vendors</h1>
+<h2 id="write-once-brand-everywhere">Write Once. Brand Everywhere.</h2>
+<table>
+<thead>
+<tr>
+<th>Before MBX</th>
+<th>With MBX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Build iOS app</td>
+<td>Write ONE Lua module</td>
+</tr>
+<tr>
+<td>Build Android app</td>
+<td>(~100 lines of code)</td>
+</tr>
+<tr>
+<td>Maintain both forever</td>
+<td>Submit once</td>
+</tr>
+<tr>
+<td>App store fees &amp; reviews</td>
+<td>Live on ALL platforms</td>
+</tr>
+<tr>
+<td>Support burden</td>
+<td>CSA handles distribution</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Your brand in Apple Home, Google Home, Amazon Alexa—without building a single app.</strong></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;For device vendors, this is transformational.&quot;</p>
+<p>&quot;Today, if you want your brand and full features accessible to users, you build apps. iOS app: Swift, SwiftUI, yearly iOS updates, App Store review. Android app: Kotlin, Compose, device fragmentation, Play Store review.&quot;</p>
+<p>&quot;With MBX, you write approximately 100 lines of Lua. You fork the standard module, add your logo, add your features. Submit it. Done.&quot;</p>
+<p>&quot;Your brand appears in Apple Home, Google Home, Amazon Alexa. No app maintenance. No app store fees. No review process beyond CSA certification.&quot;</p>
+<p>&quot;Small vendors especially benefit. A two-person startup can have the same platform presence as Philips.&quot;</p>
+<p><em>Timing: 1.5 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="who-wins-platform-vendors">Who Wins: Platform Vendors</h1>
+<p><img src="platform_savings.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Now let's talk about why Apple, Google, and Amazon should LOVE this.&quot;</p>
+<p>Point to LEFT side:
+&quot;WITHOUT MBX, platforms must build custom UI for every device type. 50+ device types, times 3 platforms, equals 150+ implementations. Ongoing maintenance forever. Every time CSA adds a new device type, every platform team scrambles.&quot;</p>
+<p>Point to RIGHT side:
+&quot;WITH MBX, platforms build TWO things: a Lua runtime and a UI renderer. That's it. Maybe 500 lines of platform code, total.&quot;</p>
+<p>&quot;Every device UI—current AND future—comes from the CSA registry. New device type? It just works. No platform update required.&quot;</p>
+<p>&quot;Platform engineers can focus on what matters: performance, polish, integration. Not implementing thermostat UIs.&quot;</p>
+<p><em>Timing: 1.5 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="who-wins-users">Who Wins: Users</h1>
+<h2 id="one-app-full-control-no-compromises">One App. Full Control. No Compromises.</h2>
+<ul>
+<li><strong>No more &quot;download our app&quot;</strong></li>
+<li><strong>Full device features in their preferred platform</strong></li>
+<li><strong>Consistent experience across all devices</strong></li>
+<li><strong>Vendor branding without vendor apps</strong></li>
+</ul>
+<blockquote>
+<p>&quot;I just want to control my lights. I don't want 12 apps to do it.&quot;
+— Every smart home user</p>
+</blockquote>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Users are the ultimate winners here.&quot;</p>
+<p>&quot;They pick their favorite platform—Apple Home, Google Home, Amazon Alexa—and they're DONE. Every device they buy, full control, right there.&quot;</p>
+<p>&quot;No more hunting through vendor apps. No more remembering which app controls which device. No more managing 15 accounts and passwords.&quot;</p>
+<p>&quot;And they still get vendor branding and features. The Philips Hue experience. The Ecobee experience. Just... inside their preferred app.&quot;</p>
+<p><em>Timing: 1 minute</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="who-wins-csa">Who Wins: CSA</h1>
+<h2 id="control-the-pace-of-innovation">Control the Pace of Innovation</h2>
+<ul>
+<li><strong>CSA publishes device type + standard module = instant support everywhere</strong></li>
+<li><strong>No more waiting for platform updates</strong></li>
+<li><strong>Certification revenue (module certification fees)</strong></li>
+<li><strong>Drives Matter adoption</strong> (vendors choose Matter for MBX)</li>
+<li><strong>Fulfills the Matter promise</strong></li>
+</ul>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;For CSA, this is strategic.&quot;</p>
+<p>&quot;Today, when CSA ratifies a new device type, nothing happens for users until Apple updates Home, Google updates Home, Amazon updates Alexa. That's 6-12 months, EACH.&quot;</p>
+<p>&quot;With MBX, CSA publishes the device type AND the standard module. Platforms pull it automatically. Users have full UI on day one.&quot;</p>
+<p>&quot;CSA controls the pace of innovation. Not platform release cycles.&quot;</p>
+<p>&quot;There's also a revenue opportunity: module certification fees. Every vendor submitting a branded module goes through certification.&quot;</p>
+<p>&quot;And strategically, vendors will choose Matter BECAUSE of MBX. 'I can get my brand in every platform without building apps? Sign me up.'&quot;</p>
+<p><em>Timing: 1.5 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="the-game-changer-instant-device-support">The Game Changer: Instant Device Support</h1>
+<p><img src="timeline.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Let me show you what this means for new device types.&quot;</p>
+<p>Point to TOP (red):
+&quot;TODAY: CSA publishes a new device type in January 2025. Apple needs to update their Home app—6 to 12 months. Google, same. Amazon, same. Users are waiting until late 2025 for full support, IF the platforms prioritize it.&quot;</p>
+<p>Point to BOTTOM (green):
+&quot;WITH MBX: CSA publishes the device type AND the standard module. Same day. Platforms pull from the registry. Users have full UI on day one.&quot;</p>
+<p>&quot;No app updates. No waiting. No hoping platforms prioritize your device category.&quot;</p>
+<p>&quot;This alone should make MBX compelling. New device categories—robot vacuums, pool controllers, EV chargers—users get full UI immediately.&quot;</p>
+<p><em>Timing: 1.5 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="proven-architecture">Proven Architecture</h1>
+<p><img src="widgetkit.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Now, some of you might be thinking: 'Running vendor code on our platform? That sounds risky.'&quot;</p>
+<p>&quot;Here's the thing: Apple already does this. It's called WidgetKit.&quot;</p>
+<p>Point to LEFT:
+&quot;WidgetKit: Third-party apps provide widget code. iOS renders it on the home screen. Sandboxed execution. Limited API. Platform-native rendering.&quot;</p>
+<p>Point to RIGHT:
+&quot;MBX: Third-party vendors provide module code. Platforms render it in the home app. Sandboxed execution. Limited API. Platform-native rendering.&quot;</p>
+<p>&quot;SAME PATTERN.&quot;</p>
+<p>&quot;Apple ships WidgetKit to 1+ billion devices. Millions of widgets from thousands of developers. If Apple trusts sandboxed code for the home screen, platforms can trust it for device UI.&quot;</p>
+<p>Read the tagline:
+&quot;WidgetKit is MBX for the home screen. MBX is WidgetKit for smart home devices.&quot;</p>
+<p><em>Timing: 2 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="security-model">Security Model</h1>
+<h2 id="built-on-proven-principles">Built on Proven Principles</h2>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sandboxed Execution</strong></td>
+<td>Lua VM with no file/network access</td>
+</tr>
+<tr>
+<td><strong>Declarative Output</strong></td>
+<td>Code produces UI description, not actions</td>
+</tr>
+<tr>
+<td><strong>Platform Rendering</strong></td>
+<td>Native frameworks render all UI</td>
+</tr>
+<tr>
+<td><strong>CSA Certification</strong></td>
+<td>Every module reviewed and signed</td>
+</tr>
+<tr>
+<td><strong>Existing PKI</strong></td>
+<td>Uses vendor's existing CSA certificates</td>
+</tr>
+<tr>
+<td><strong>Revocation</strong></td>
+<td>CSA can revoke malicious modules instantly</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Privacy:</strong> All rendering is LOCAL. No user data sent to vendors or CSA.</p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Security is obviously critical. Here's the model.&quot;</p>
+<p>&quot;Modules run in a sandboxed Lua VM. No file system access. No network access. No device sensors. The ONLY thing they can do is produce a UI description and call the platform's Matter APIs.&quot;</p>
+<p>&quot;The platform does all the rendering. Vendors can't draw arbitrary pixels—they describe UI components, platforms render them natively.&quot;</p>
+<p>&quot;Every module goes through CSA certification. Automated analysis, resource profiling, human review. Then it's signed with the vendor's existing CSA certificate—same PKI they already use for device certification.&quot;</p>
+<p>&quot;If a module turns out to be malicious? CSA revokes it. Platforms stop loading it. Done.&quot;</p>
+<p>&quot;And critically: all rendering is LOCAL. On the user's device. No user data flows to vendors or CSA. Complete privacy.&quot;</p>
+<p><em>Timing: 1.5 minutes</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="how-it-works-simplified">How It Works (Simplified)</h1>
+<p><img src="architecture.png" alt=""></p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Here's the architecture in 30 seconds.&quot;</p>
+<p>&quot;Vendor writes a Lua module. About 100 lines for a typical device. It describes the UI and what Matter commands to send when users interact.&quot;</p>
+<p>&quot;Module goes to the CSA registry. Certified, signed, stored.&quot;</p>
+<p>&quot;Platforms—Apple, Google, Amazon—download modules from the registry. They run the Lua in a sandboxed VM, get back a UI description, and render it with their native framework.&quot;</p>
+<p>&quot;Same module produces SwiftUI on iOS, Compose on Android, whatever Amazon uses. Native look and feel, everywhere.&quot;</p>
+<p>&quot;That's it. That's the whole architecture.&quot;</p>
+<p><em>Timing: 1 minute</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="the-ask">The Ask</h1>
+<h2 id="establish-the-mbx-working-group">Establish the MBX Working Group</h2>
+<p><strong>Phase 1: Specification (3 months)</strong></p>
+<ul>
+<li>Formalize UI primitive set</li>
+<li>Define module format and APIs</li>
+<li>Specify security requirements</li>
+</ul>
+<p><strong>Phase 2: Reference Implementation (6 months)</strong></p>
+<ul>
+<li>iOS reference runtime</li>
+<li>Android reference runtime</li>
+<li>Module development SDK</li>
+</ul>
+<p><strong>Phase 3: Pilot Program (3 months)</strong></p>
+<ul>
+<li>10 device vendors</li>
+<li>2-3 platform partners</li>
+<li>Real-world validation</li>
+</ul>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;So here's what we're asking for.&quot;</p>
+<p>&quot;Establish an MBX Working Group within CSA. We've done the design work—there's a 50-page technical specification ready for review.&quot;</p>
+<p>&quot;Phase 1: Formalize the specification. UI primitives, module format, security requirements. Three months with the right people in the room.&quot;</p>
+<p>&quot;Phase 2: Build reference implementations. iOS runtime, Android runtime, SDK for module developers. Six months.&quot;</p>
+<p>&quot;Phase 3: Pilot with real vendors and platforms. Ten device vendors, a couple platform partners. Validate it works in the real world.&quot;</p>
+<p>&quot;Twelve months from kickoff to production-ready specification and tooling.&quot;</p>
+<p><em>Timing: 1 minute</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="why-now">Why Now</h1>
+<ol>
+<li>
+<p><strong>Matter adoption is accelerating</strong></p>
+<ul>
+<li>Billions of devices expected by 2027</li>
+</ul>
+</li>
+<li>
+<p><strong>User frustration is mounting</strong></p>
+<ul>
+<li>App fatigue limits smart home adoption</li>
+</ul>
+</li>
+<li>
+<p><strong>Vendors want relief</strong></p>
+<ul>
+<li>App development is expensive and distracting</li>
+</ul>
+</li>
+<li>
+<p><strong>The technology is ready</strong></p>
+<ul>
+<li>SwiftUI, Compose make native rendering trivial</li>
+<li>Lua is battle-tested (Roblox: 70M+ daily users)</li>
+</ul>
+</li>
+<li>
+<p><strong>The architecture is proven</strong></p>
+<ul>
+<li>WidgetKit, server-driven UI at Airbnb/Netflix/Shopify</li>
+</ul>
+</li>
+</ol>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Why now? Why is this the right moment?&quot;</p>
+<p>&quot;Matter is taking off. We're going to see billions of Matter devices. The fragmentation problem will only get worse.&quot;</p>
+<p>&quot;Users are frustrated. 'Too many apps' is the number one complaint about smart homes. It's limiting adoption.&quot;</p>
+<p>&quot;Vendors are tired of app development. It's expensive, distracting from their core business, and they STILL can't reach users in the major platforms.&quot;</p>
+<p>&quot;The technology is ready. SwiftUI and Compose make native rendering easy. Lua is proven at massive scale—Roblox runs on it with 70 million daily users.&quot;</p>
+<p>&quot;And the architecture is proven. Apple does this with WidgetKit. Airbnb, Netflix, Shopify all use server-driven UI. We're not inventing anything—we're applying proven patterns to smart home.&quot;</p>
+<p><em>Timing: 1 minute</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="the-vision">The Vision</h1>
+<p><strong>One module. Every platform. Full branding.</strong></p>
+<ul>
+<li>Users pick ONE app and get EVERYTHING</li>
+<li>Vendors reach EVERY platform without building apps</li>
+<li>Platforms get richer ecosystems without engineering work</li>
+<li>CSA controls the pace of innovation</li>
+</ul>
+<h2 id="matter-promised-interoperability">Matter promised interoperability.</h2>
+<h2 id="mbx-delivers-it">MBX delivers it.</h2>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;Let me leave you with the vision.&quot;</p>
+<p>&quot;One module. Every platform. Full branding.&quot;</p>
+<p>&quot;Users pick their favorite app—Apple Home, Google Home, Amazon Alexa—and they get full control of every device with full vendor branding. Done.&quot;</p>
+<p>&quot;Vendors write one module—100 lines of Lua—and their brand appears everywhere. No apps to build or maintain.&quot;</p>
+<p>&quot;Platforms get a richer ecosystem. More devices, more features, more user satisfaction. Without lifting a finger for new device types.&quot;</p>
+<p>&quot;And CSA? CSA becomes the center of smart home UI. You publish a device type, it works everywhere, immediately.&quot;</p>
+<p>&quot;Matter promised interoperability. MBX delivers it.&quot;</p>
+<p><em>Timing: 1 minute</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="questions">Questions?</h1>
+<p><strong>Technical Specification:</strong> Available upon request</p>
+<p><strong>Contact:</strong> [your contact info]</p>
+<p><strong>Next Step:</strong> Working group formation vote</p>
+<p><strong>SPEAKER NOTES:</strong></p>
+<p>&quot;I'm happy to take questions. We also have a detailed technical specification—about 50 pages—available for anyone who wants to dig into the implementation details.&quot;</p>
+<p>&quot;The next step is a vote to form the MBX Working Group. I hope I've convinced you this is worth pursuing.&quot;</p>
+<p>&quot;Questions?&quot;</p>
+<p><em>Timing: Remaining time for Q&amp;A</em></p>
+<div style="page-break-after: always;"></div>
+<h1 id="appendix-image-files">Appendix: Image Files</h1>
+<table>
+<thead>
+<tr>
+<th>Slide</th>
+<th>Image File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td><code>frustration.png</code></td>
+<td>Phone with 15+ app icons, frustrated user</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>unification.png</code></td>
+<td>Phone with single Home app, devices orbiting</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>MDUI_example_screens.png</code></td>
+<td>Four iPhone screens: Standard → Branded → Extended → Extended UI</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>branded.png</code></td>
+<td>Three phones (Apple/Google/Amazon) showing Philips Hue UI</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>workflow.png</code></td>
+<td>Fork → Brand → Submit → Done workflow</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>platform_savings.png</code></td>
+<td>Without MBX vs With MBX engineering comparison</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>timeline.png</code></td>
+<td>Today (6-12 months) vs With MBX (instant)</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>widgetkit.png</code></td>
+<td>Apple WidgetKit ≈ MBX architecture comparison</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
